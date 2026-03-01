@@ -1,0 +1,43 @@
+# Apple Health raw data (NEVER commit - 5GB XML, 264MB zip)
+*.xml
+*.zip
+apple_health_export/
+
+# SQLite database (regenerable from XML via ETL)
+*.db
+*.db-journal
+
+# Strong App raw exports
+Strong *.xlsx
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Temporary files
+*.tmp
+*.bak

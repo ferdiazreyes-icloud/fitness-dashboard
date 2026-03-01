@@ -1,0 +1,98 @@
+fecha,dia,sesion,orden_ejercicio,ejercicio,serie,peso_lb,reps,duracion_seg,distancia_km,rpe_target,descanso_seg,notas
+2026-02-24,lunes,Fuerza A - Warmup,1,Elliptical Machine,1,,,,,,120,warmup
+2026-02-24,lunes,Fuerza A - Warmup,2,World's Greatest Stretch,1,,8,,,,,warmup
+2026-02-24,lunes,Fuerza A - Warmup,3,Balanceo De Pierna,1,,10,,,,,warmup por lado
+2026-02-24,lunes,Fuerza A - Warmup,3,Balanceo De Pierna,2,,10,,,,,warmup por lado
+2026-02-24,lunes,Fuerza A - Warmup,4,Air Squat,1,,6,,,,,warmup
+2026-02-24,lunes,Fuerza A - Warmup,4,Air Squat,2,,6,,,,,warmup
+2026-02-24,lunes,Fuerza A - Warmup,5,Scap Pull up,1,,6,,,,,warmup
+2026-02-24,lunes,Fuerza A - Warmup,5,Scap Pull up,2,,6,,,,,warmup
+2026-02-24,lunes,Fuerza A - Warmup,6,Push Up,1,,6,,,,,warmup
+2026-02-24,lunes,Fuerza A - Warmup,6,Push Up,2,,6,,,,,warmup
+2026-02-24,lunes,Fuerza A - Superserie,7,Squat (Barbell),1,175.0,4,,,7.5-8,120,superserie ronda 1 - autoregular si RPE<7 sube a 180-185
+2026-02-24,lunes,Fuerza A - Superserie,8,Pull Up,1,37.0,3,,,8,,superserie ronda 1 - lastrado
+2026-02-24,lunes,Fuerza A - Superserie,9,Ring dip,1,,5,,,8,,superserie ronda 1
+2026-02-24,lunes,Fuerza A - Superserie,7,Squat (Barbell),2,175.0,4,,,7.5-8,120,superserie ronda 2
+2026-02-24,lunes,Fuerza A - Superserie,8,Pull Up,2,37.0,3,,,8,,superserie ronda 2
+2026-02-24,lunes,Fuerza A - Superserie,9,Ring dip,2,,5,,,8,,superserie ronda 2
+2026-02-24,lunes,Fuerza A - Superserie,7,Squat (Barbell),3,175.0,4,,,7.5-8,120,superserie ronda 3
+2026-02-24,lunes,Fuerza A - Superserie,8,Pull Up,3,37.0,3,,,8,,superserie ronda 3
+2026-02-24,lunes,Fuerza A - Superserie,9,Ring dip,3,,5,,,8,,superserie ronda 3
+2026-02-24,lunes,Fuerza A - Superserie,7,Squat (Barbell),4,175.0,4,,,7.5-8,120,superserie ronda 4
+2026-02-24,lunes,Fuerza A - Superserie,8,Pull Up,4,37.0,3,,,8,,superserie ronda 4
+2026-02-24,lunes,Fuerza A - Superserie,9,Ring dip,4,,5,,,8,,superserie ronda 4
+2026-02-24,lunes,Fuerza A - Grip,10,Farmer's Carry,1,180.0,35,,,,60,pasos
+2026-02-24,lunes,Fuerza A - Grip,10,Farmer's Carry,2,180.0,35,,,,60,pasos
+2026-02-24,lunes,Fuerza A - Grip,10,Farmer's Carry,3,180.0,40,,,,60,pasos
+2026-02-24,lunes,Fuerza A - Grip,10,Farmer's Carry,4,180.0,40,,,,60,pasos
+2026-02-24,lunes,Fuerza A - Grip,11,Dead Hang,1,,,30,,,60,
+2026-02-24,lunes,Fuerza A - Grip,11,Dead Hang,2,,,30,,,,
+2026-02-25,martes,Z2 Run,1,Running - Z2,1,,,2700-3000,6.0-6.5,,,"La Mexicana desde Antigua - pace 6:45-7:00/km - HR <=150bpm"
+2026-02-25,martes,Z2 Run,2,Strides,1,,,20,,,,"opcional si se siente fresco post-recovery"
+2026-02-25,martes,Z2 Run,2,Strides,2,,,20,,,,opcional
+2026-02-25,martes,Z2 Run,2,Strides,3,,,20,,,,opcional
+2026-02-25,martes,Z2 Run,2,Strides,4,,,20,,,,opcional
+2026-02-26,miercoles,Fuerza B - Warmup,1,Elliptical Machine,1,,,,,,120,warmup
+2026-02-26,miercoles,Fuerza B - Warmup,2,Hip Hinge W/bar,1,45.0,6,,,,,warmup
+2026-02-26,miercoles,Fuerza B - Warmup,2,Hip Hinge W/bar,2,45.0,6,,,,,warmup
+2026-02-26,miercoles,Fuerza B - Warmup,3,Deadbug,1,,20,,,,,warmup
+2026-02-26,miercoles,Fuerza B - Warmup,3,Deadbug,2,,20,,,,,warmup
+2026-02-26,miercoles,Fuerza B - Warmup,4,Scapular row,1,,8,,,,,warmup
+2026-02-26,miercoles,Fuerza B - Warmup,4,Scapular row,2,,8,,,,,warmup
+2026-02-26,miercoles,Fuerza B - Warmup,5,Glute bridge,1,,8,,,,,warmup
+2026-02-26,miercoles,Fuerza B - Warmup,5,Glute bridge,2,,8,,,,,warmup
+2026-02-26,miercoles,Fuerza B - Deadlift,6,Deadlift (Barbell),1,315.0,3,,,7.5-8,180,straps si necesitas
+2026-02-26,miercoles,Fuerza B - Deadlift,6,Deadlift (Barbell),2,315.0,3,,,7.5-8,180,
+2026-02-26,miercoles,Fuerza B - Deadlift,6,Deadlift (Barbell),3,315.0,3,,,7.5-8,180,
+2026-02-26,miercoles,Fuerza B - Deadlift,6,Deadlift (Barbell),4,315.0,3,,,7.5-8,180,
+2026-02-26,miercoles,Fuerza B - Superserie,7,Overhead Press (Barbell),1,100.0,6,,,8,15-20,superserie con BOR - descanso 90s entre rondas
+2026-02-26,miercoles,Fuerza B - Superserie,8,Bent Over Row (Barbell),1,165.0,6,,,8,90,superserie ronda 1
+2026-02-26,miercoles,Fuerza B - Superserie,7,Overhead Press (Barbell),2,100.0,6,,,8,15-20,superserie ronda 2
+2026-02-26,miercoles,Fuerza B - Superserie,8,Bent Over Row (Barbell),2,165.0,6,,,8,90,superserie ronda 2
+2026-02-26,miercoles,Fuerza B - Superserie,7,Overhead Press (Barbell),3,100.0,6,,,8,15-20,superserie ronda 3
+2026-02-26,miercoles,Fuerza B - Superserie,8,Bent Over Row (Barbell),3,165.0,6,,,8,90,superserie ronda 3
+2026-02-26,miercoles,Fuerza B - Superserie,7,Overhead Press (Barbell),4,100.0,6,,,8,15-20,superserie ronda 4
+2026-02-26,miercoles,Fuerza B - Superserie,8,Bent Over Row (Barbell),4,165.0,6,,,8,90,superserie ronda 4
+2026-02-26,miercoles,Fuerza B - Spartan,9,Rope climb,1,,1,,,8,60,
+2026-02-26,miercoles,Fuerza B - Spartan,9,Rope climb,2,,1,,,8,60,
+2026-02-26,miercoles,Fuerza B - Spartan,9,Rope climb,3,,1,,,8,60,
+2026-02-26,miercoles,Fuerza B - Spartan,9,Rope climb,4,,1,,,8,60,
+2026-02-26,miercoles,Fuerza B - Spartan,9,Rope climb,5,,1,,,8,60,
+2026-02-26,miercoles,Fuerza B - Spartan,9,Rope climb,6,,1,,,8,60,
+2026-02-27,jueves,Circuito Spartan - Warmup,1,Trote suave,1,,,300,,,,"5 min ~7:30/km"
+2026-02-27,jueves,Circuito Spartan - Warmup,2,Air Squat,1,,10,,,,,warmup
+2026-02-27,jueves,Circuito Spartan - Warmup,3,Balanceo De Pierna,1,,10,,,,,warmup por lado
+2026-02-27,jueves,Circuito Spartan - Warmup,4,Burpee,1,,5,,,,,warmup medio gas
+2026-02-27,jueves,Circuito Spartan - Warmup,5,Plank,1,,,20,,,20,warmup
+2026-02-27,jueves,Circuito Spartan - Warmup,5,Plank,2,,,20,,,,warmup
+2026-02-27,jueves,Circuito Spartan - Bloque,6,Burpee,1,,10,,,,,bloque 1 - 4min trabajo con trote continuo
+2026-02-27,jueves,Circuito Spartan - Bloque,7,KB Swing,1,,15,,,,,bloque 2 - 4min trabajo con trote continuo
+2026-02-27,jueves,Circuito Spartan - Bloque,8,Jump Squat,1,,8,,,,,bloque 3 - 4min trabajo con trote continuo
+2026-02-27,jueves,Circuito Spartan - Bloque,9,Plank Hold,1,,,30,,,,,bloque 4 - 4min trabajo con trote continuo
+2026-02-27,jueves,Circuito Spartan - Bloque,10,Burpee,2,,10,,,,,bloque 5 - 4min trabajo con trote continuo
+2026-02-27,jueves,Circuito Spartan - Bloque,11,Goblet Squat,1,,12,,,,,bloque 6 - 4min trabajo con trote continuo
+2026-02-27,jueves,Circuito Spartan - Total,12,Running - Circuito,1,,,1800-2100,5.0-6.0,,,"distancia total estimada incluyendo trote entre bloques - descanso 1min entre bloques"
+2026-02-28,viernes,Fuerza C - Warmup,1,Elliptical Machine,1,,,,,,120,warmup
+2026-02-28,viernes,Fuerza C - Warmup,2,Reverse Fly (Cable),1,10.0,10,,,,,warmup
+2026-02-28,viernes,Fuerza C - Warmup,3,Scap Push Ups,1,,8,,,,,warmup
+2026-02-28,viernes,Fuerza C - Warmup,4,Hollow,1,,,20,,,20,warmup
+2026-02-28,viernes,Fuerza C - Warmup,4,Hollow,2,,,20,,,,warmup
+2026-02-28,viernes,Fuerza C - Principal,5,Bench Press (Barbell),1,135.0,5,,,7.5-8,90,alternando con front squat y chin
+2026-02-28,viernes,Fuerza C - Principal,6,Front Squat (Barbell),1,95.0,4,,,7.5-8,,
+2026-02-28,viernes,Fuerza C - Principal,7,Chin Up,1,22.0,4,,,8,90,
+2026-02-28,viernes,Fuerza C - Principal,5,Bench Press (Barbell),2,140.0,5,,,7.5-8,90,
+2026-02-28,viernes,Fuerza C - Principal,6,Front Squat (Barbell),2,95.0,4,,,7.5-8,,
+2026-02-28,viernes,Fuerza C - Principal,7,Chin Up,2,22.0,4,,,8,90,
+2026-02-28,viernes,Fuerza C - Principal,5,Bench Press (Barbell),3,145.0,5,,,8,90,
+2026-02-28,viernes,Fuerza C - Principal,6,Front Squat (Barbell),3,95.0,4,,,8,,
+2026-02-28,viernes,Fuerza C - Principal,7,Chin Up,3,25.0,4,,,8,90,
+2026-02-28,viernes,Fuerza C - Principal,5,Bench Press (Barbell),4,145.0,5,,,8,90,
+2026-02-28,viernes,Fuerza C - Principal,6,Front Squat (Barbell),4,95.0,4,,,8,,
+2026-02-28,viernes,Fuerza C - Principal,7,Chin Up,4,25.0,4,,,8,90,
+2026-02-28,viernes,Fuerza C - Grip,8,Weight Hold,1,25.0,,20-30,,,30,pinch grip por mano - 25lb/mano
+2026-02-28,viernes,Fuerza C - Grip,8,Weight Hold,2,25.0,,20-30,,,30,pinch grip por mano
+2026-02-28,viernes,Fuerza C - Grip,8,Weight Hold,3,25.0,,20-30,,,,pinch grip por mano
+2026-02-28,viernes,Fuerza C - Grip,9,Dead Hang,1,,,30,,,,
+2026-02-28,viernes,Fuerza C - Grip,9,Dead Hang,2,,,30,,,,
+2026-03-01,sabado,Con Connie,1,Actividad variable,1,,,3600-5400,,,,"trail run 60-90min (prioridad) / OTF / bici / Sersana"
+2026-03-02,domingo,Recovery,1,Movilidad,1,,,,,,,"caminar - estirar - foam roller"

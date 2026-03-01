@@ -1,0 +1,630 @@
+date,workout_name,exercise,set_type,set_num,weight_lb,reps,seconds,rpe_actual
+2025-12-29,GPT 1 - lunes ,Elliptical Machine,working,1,0.0,0,120,
+2025-12-29,GPT 1 - lunes ,Worldâ€™s Greatest Stretch,working,1,0.0,8,0,
+2025-12-29,GPT 1 - lunes ,Balanceo De Pierna,working,1,0.0,10,0,
+2025-12-29,GPT 1 - lunes ,Balanceo De Pierna,working,2,0.0,10,0,
+2025-12-29,GPT 1 - lunes ,Air Squat,working,1,0.0,6,0,
+2025-12-29,GPT 1 - lunes ,Air Squat,working,2,0.0,6,0,
+2025-12-29,GPT 1 - lunes ,Scap Pull up,working,1,0.0,6,0,
+2025-12-29,GPT 1 - lunes ,Scap Pull up,working,2,0.0,6,0,
+2025-12-29,GPT 1 - lunes ,Push Up,working,1,0.0,6,0,
+2025-12-29,GPT 1 - lunes ,Push Up,working,2,0.0,6,0,
+2025-12-29,GPT 1 - lunes ,Squat (Barbell),warmup,0,45.0,8,0,
+2025-12-29,GPT 1 - lunes ,Squat (Barbell),warmup,0,95.0,5,0,
+2025-12-29,GPT 1 - lunes ,Squat (Barbell),working,1,185.0,3,0,10.0
+2025-12-29,GPT 1 - lunes ,Squat (Barbell),working,2,165.0,4,0,9.0
+2025-12-29,GPT 1 - lunes ,Squat (Barbell),working,3,165.0,4,0,9.0
+2025-12-29,GPT 1 - lunes ,Squat (Barbell),working,4,165.0,4,0,9.0
+2025-12-29,GPT 1 - lunes ,Pull Up,working,1,42.0,3,0,9.0
+2025-12-29,GPT 1 - lunes ,Pull Up,working,2,32.0,3,0,8.0
+2025-12-29,GPT 1 - lunes ,Pull Up,working,3,32.0,3,0,8.0
+2025-12-29,GPT 1 - lunes ,Pull Up,working,4,32.0,3,0,8.0
+2025-12-29,GPT 1 - lunes ,Ring dip,working,1,0.0,5,0,9.0
+2025-12-29,GPT 1 - lunes ,Ring dip,working,2,0.0,5,0,9.0
+2025-12-29,GPT 1 - lunes ,Ring dip,working,3,0.0,5,0,10.0
+2025-12-29,GPT 1 - lunes ,Ring dip,working,4,0.0,5,0,9.0
+2025-12-29,GPT 1 - lunes ,Farmerâ€™s Carry,working,1,180.0,30,0,9.0
+2025-12-29,GPT 1 - lunes ,Farmerâ€™s Carry,working,2,180.0,30,0,9.0
+2025-12-29,GPT 1 - lunes ,Farmerâ€™s Carry,working,3,180.0,30,0,9.0
+2025-12-29,GPT 1 - lunes ,Farmerâ€™s Carry,working,4,180.0,30,0,10.0
+2025-12-29,GPT 1 - lunes ,Farmerâ€™s Carry,working,5,180.0,30,0,10.0
+2025-12-29,GPT 1 - lunes ,Farmerâ€™s Carry,working,6,180.0,17,0,8.0
+2025-12-29,GPT 1 - lunes ,Dead Hang,working,1,0.0,0,30,
+2025-12-29,GPT 1 - lunes ,Dead Hang,working,2,0.0,0,30,
+2025-12-31,GPT 1 - MiÃ©rcoles ,Elliptical Machine,working,1,0.0,0,120,
+2025-12-31,GPT 1 - MiÃ©rcoles ,Hip Hinge W/kettlebell,working,1,26.0,6,0,
+2025-12-31,GPT 1 - MiÃ©rcoles ,Hip Hinge W/kettlebell,working,2,26.0,6,0,
+2025-12-31,GPT 1 - MiÃ©rcoles ,Deadbug,working,1,0.0,20,0,
+2025-12-31,GPT 1 - MiÃ©rcoles ,Deadbug,working,2,0.0,20,0,
+2025-12-31,GPT 1 - MiÃ©rcoles ,Scapular row,working,1,0.0,8,0,
+2025-12-31,GPT 1 - MiÃ©rcoles ,Scapular row,working,2,0.0,8,0,
+2025-12-31,GPT 1 - MiÃ©rcoles ,Glute bridge,working,1,0.0,8,0,
+2025-12-31,GPT 1 - MiÃ©rcoles ,Glute bridge,working,2,0.0,8,0,
+2025-12-31,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,135.0,5,0,
+2025-12-31,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,185.0,3,0,
+2025-12-31,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,225.0,2,0,
+2025-12-31,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,1,313.0,3,0,10.0
+2025-12-31,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,2,313.0,3,0,8.0
+2025-12-31,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,3,313.0,3,0,8.0
+2025-12-31,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,4,313.0,3,0,8.0
+2025-12-31,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),warmup,0,115.0,5,0,10.0
+2025-12-31,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,1,95.0,6,0,8.0
+2025-12-31,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,2,95.0,6,0,8.0
+2025-12-31,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,3,95.0,6,0,8.0
+2025-12-31,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,4,95.0,6,0,8.0
+2025-12-31,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),warmup,0,185.0,5,0,10.0
+2025-12-31,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,1,165.0,3,0,8.0
+2025-12-31,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,2,165.0,4,0,9.0
+2025-12-31,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,3,165.0,4,0,8.0
+2025-12-31,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,4,165.0,4,0,8.0
+2025-12-31,GPT 1 - MiÃ©rcoles ,Rope climb,working,1,0.0,1,0,8.0
+2025-12-31,GPT 1 - MiÃ©rcoles ,Rope climb,working,2,0.0,1,0,8.0
+2025-12-31,GPT 1 - MiÃ©rcoles ,Rope climb,working,3,0.0,1,0,8.0
+2025-12-31,GPT 1 - MiÃ©rcoles ,Rope climb,working,4,0.0,1,0,8.0
+2025-12-31,GPT 1 - MiÃ©rcoles ,Rope climb,working,5,0.0,1,0,8.0
+2025-12-31,GPT 1 - MiÃ©rcoles ,Rope climb,working,6,0.0,1,0,8.0
+2025-12-31,GPT 1 - MiÃ©rcoles ,Rope climb,working,7,0.0,1,0,8.0
+2025-12-31,GPT 1 - MiÃ©rcoles ,Rope climb,working,8,0.0,2,0,10.0
+2026-01-05,GPT 1 - Lunes ,Elliptical Machine,working,1,0.0,0,120,
+2026-01-05,GPT 1 - Lunes ,Worldâ€™s Greatest Stretch,working,1,0.0,8,0,
+2026-01-05,GPT 1 - Lunes ,Balanceo De Pierna,working,1,0.0,10,0,
+2026-01-05,GPT 1 - Lunes ,Balanceo De Pierna,working,2,0.0,10,0,
+2026-01-05,GPT 1 - Lunes ,Air Squat,working,1,0.0,6,0,
+2026-01-05,GPT 1 - Lunes ,Air Squat,working,2,0.0,6,0,
+2026-01-05,GPT 1 - Lunes ,Scap Pull up,working,1,0.0,6,0,
+2026-01-05,GPT 1 - Lunes ,Scap Pull up,working,2,0.0,6,0,
+2026-01-05,GPT 1 - Lunes ,Push Up,working,1,0.0,6,0,
+2026-01-05,GPT 1 - Lunes ,Push Up,working,2,0.0,6,0,
+2026-01-05,GPT 1 - Lunes ,Squat (Barbell),warmup,0,45.0,8,0,6.0
+2026-01-05,GPT 1 - Lunes ,Squat (Barbell),warmup,0,95.0,5,0,6.0
+2026-01-05,GPT 1 - Lunes ,Squat (Barbell),working,1,165.0,4,0,9.0
+2026-01-05,GPT 1 - Lunes ,Squat (Barbell),working,2,165.0,4,0,8.0
+2026-01-05,GPT 1 - Lunes ,Squat (Barbell),working,3,165.0,4,0,8.0
+2026-01-05,GPT 1 - Lunes ,Squat (Barbell),working,4,165.0,4,0,8.0
+2026-01-05,GPT 1 - Lunes ,Pull Up,working,1,34.5,3,0,9.0
+2026-01-05,GPT 1 - Lunes ,Pull Up,working,2,34.5,3,0,8.0
+2026-01-05,GPT 1 - Lunes ,Pull Up,working,3,34.5,3,0,8.0
+2026-01-05,GPT 1 - Lunes ,Pull Up,working,4,34.5,3,0,8.0
+2026-01-05,GPT 1 - Lunes ,Ring dip,working,1,0.0,4,0,9.0
+2026-01-05,GPT 1 - Lunes ,Ring dip,working,2,0.0,4,0,9.0
+2026-01-05,GPT 1 - Lunes ,Ring dip,working,3,0.0,4,0,8.0
+2026-01-05,GPT 1 - Lunes ,Ring dip,working,4,0.0,4,0,8.0
+2026-01-05,GPT 1 - Lunes ,Farmerâ€™s Carry,working,1,160.0,30,0,8.0
+2026-01-05,GPT 1 - Lunes ,Farmerâ€™s Carry,working,2,160.0,30,0,9.0
+2026-01-05,GPT 1 - Lunes ,Farmerâ€™s Carry,working,3,160.0,30,0,9.0
+2026-01-05,GPT 1 - Lunes ,Farmerâ€™s Carry,working,4,160.0,30,0,9.0
+2026-01-05,GPT 1 - Lunes ,Farmerâ€™s Carry,working,5,160.0,30,0,9.0
+2026-01-05,GPT 1 - Lunes ,Farmerâ€™s Carry,working,6,160.0,30,0,9.0
+2026-01-05,GPT 1 - Lunes ,Dead Hang,working,1,0.0,0,30,
+2026-01-05,GPT 1 - Lunes ,Dead Hang,working,2,0.0,0,30,
+2026-01-07,GPT 1 - MiÃ©rcoles ,Elliptical Machine,working,1,0.0,0,120,
+2026-01-07,GPT 1 - MiÃ©rcoles ,Hip Hinge W/bar,working,1,45.0,6,0,
+2026-01-07,GPT 1 - MiÃ©rcoles ,Hip Hinge W/bar,working,2,45.0,6,0,
+2026-01-07,GPT 1 - MiÃ©rcoles ,Deadbug,working,1,0.0,20,0,
+2026-01-07,GPT 1 - MiÃ©rcoles ,Deadbug,working,2,0.0,20,0,
+2026-01-07,GPT 1 - MiÃ©rcoles ,Scapular row,working,1,0.0,8,0,
+2026-01-07,GPT 1 - MiÃ©rcoles ,Scapular row,working,2,0.0,8,0,
+2026-01-07,GPT 1 - MiÃ©rcoles ,Glute bridge,working,1,0.0,8,0,
+2026-01-07,GPT 1 - MiÃ©rcoles ,Glute bridge,working,2,0.0,8,0,
+2026-01-07,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,135.0,5,0,
+2026-01-07,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,185.0,3,0,
+2026-01-07,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,225.0,2,0,
+2026-01-07,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,1,313.0,3,0,8.0
+2026-01-07,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,2,313.0,3,0,8.0
+2026-01-07,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,3,313.0,3,0,8.0
+2026-01-07,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,4,313.0,3,0,8.0
+2026-01-07,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),warmup,0,45.0,10,0,6.0
+2026-01-07,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,1,100.0,5,0,8.0
+2026-01-07,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,2,100.0,5,0,8.0
+2026-01-07,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,3,100.0,5,0,8.0
+2026-01-07,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,4,100.0,5,0,8.0
+2026-01-07,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),warmup,0,85.0,10,0,7.0
+2026-01-07,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,1,175.0,4,0,8.0
+2026-01-07,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,2,175.0,4,0,8.0
+2026-01-07,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,3,175.0,4,0,8.0
+2026-01-07,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,4,175.0,4,0,8.0
+2026-01-07,GPT 1 - MiÃ©rcoles ,Rope climb,working,1,0.0,1,0,8.0
+2026-01-07,GPT 1 - MiÃ©rcoles ,Rope climb,working,2,0.0,1,0,8.0
+2026-01-07,GPT 1 - MiÃ©rcoles ,Rope climb,working,3,0.0,1,0,8.0
+2026-01-07,GPT 1 - MiÃ©rcoles ,Rope climb,working,4,0.0,1,0,8.0
+2026-01-07,GPT 1 - MiÃ©rcoles ,Rope climb,working,5,0.0,1,0,8.0
+2026-01-07,GPT 1 - MiÃ©rcoles ,Rope climb,working,6,0.0,1,0,8.0
+2026-01-07,GPT 1 - MiÃ©rcoles ,Rope climb,working,7,0.0,1,0,8.0
+2026-01-07,GPT 1 - MiÃ©rcoles ,Rope climb,working,8,0.0,2,0,10.0
+2026-01-12,GPT 1 - Lunes ,Elliptical Machine,working,1,0.0,0,120,
+2026-01-12,GPT 1 - Lunes ,Worldâ€™s Greatest Stretch,working,1,0.0,8,0,
+2026-01-12,GPT 1 - Lunes ,Balanceo De Pierna,working,1,0.0,10,0,
+2026-01-12,GPT 1 - Lunes ,Balanceo De Pierna,working,2,0.0,10,0,
+2026-01-12,GPT 1 - Lunes ,Air Squat,working,1,0.0,6,0,
+2026-01-12,GPT 1 - Lunes ,Air Squat,working,2,0.0,6,0,
+2026-01-12,GPT 1 - Lunes ,Scap Pull up,working,1,0.0,6,0,
+2026-01-12,GPT 1 - Lunes ,Scap Pull up,working,2,0.0,6,0,
+2026-01-12,GPT 1 - Lunes ,Push Up,working,1,0.0,6,0,
+2026-01-12,GPT 1 - Lunes ,Push Up,working,2,0.0,6,0,
+2026-01-12,GPT 1 - Lunes ,Squat (Barbell),warmup,0,45.0,8,0,6.0
+2026-01-12,GPT 1 - Lunes ,Squat (Barbell),warmup,0,95.0,5,0,6.0
+2026-01-12,GPT 1 - Lunes ,Squat (Barbell),working,1,175.0,4,0,8.0
+2026-01-12,GPT 1 - Lunes ,Squat (Barbell),working,2,175.0,4,0,8.0
+2026-01-12,GPT 1 - Lunes ,Squat (Barbell),working,3,175.0,4,0,8.0
+2026-01-12,GPT 1 - Lunes ,Squat (Barbell),working,4,175.0,4,0,8.0
+2026-01-12,GPT 1 - Lunes ,Pull Up,working,1,37.0,3,0,9.0
+2026-01-12,GPT 1 - Lunes ,Pull Up,working,2,37.0,3,0,8.0
+2026-01-12,GPT 1 - Lunes ,Pull Up,working,3,37.0,3,0,8.0
+2026-01-12,GPT 1 - Lunes ,Pull Up,working,4,37.0,3,0,8.0
+2026-01-12,GPT 1 - Lunes ,Ring dip,working,1,0.0,5,0,9.0
+2026-01-12,GPT 1 - Lunes ,Ring dip,working,2,0.0,4,0,10.0
+2026-01-12,GPT 1 - Lunes ,Ring dip,working,3,0.0,5,0,8.0
+2026-01-12,GPT 1 - Lunes ,Ring dip,working,4,0.0,5,0,9.0
+2026-01-12,GPT 1 - Lunes ,Farmerâ€™s Carry,working,1,160.0,30,0,8.0
+2026-01-12,GPT 1 - Lunes ,Farmerâ€™s Carry,working,2,160.0,30,0,8.0
+2026-01-12,GPT 1 - Lunes ,Farmerâ€™s Carry,working,3,160.0,30,0,8.0
+2026-01-12,GPT 1 - Lunes ,Farmerâ€™s Carry,working,4,160.0,30,0,8.0
+2026-01-12,GPT 1 - Lunes ,Farmerâ€™s Carry,working,5,160.0,30,0,8.0
+2026-01-12,GPT 1 - Lunes ,Farmerâ€™s Carry,working,6,160.0,30,0,9.0
+2026-01-12,GPT 1 - Lunes ,Dead Hang,working,1,0.0,0,30,
+2026-01-12,GPT 1 - Lunes ,Dead Hang,working,2,0.0,0,30,
+2026-01-14,GPT 1 - MiÃ©rcoles ,Elliptical Machine,working,1,0.0,0,120,
+2026-01-14,GPT 1 - MiÃ©rcoles ,Hip Hinge W/bar,working,1,45.0,6,0,
+2026-01-14,GPT 1 - MiÃ©rcoles ,Hip Hinge W/bar,working,2,45.0,6,0,
+2026-01-14,GPT 1 - MiÃ©rcoles ,Deadbug,working,1,0.0,20,0,
+2026-01-14,GPT 1 - MiÃ©rcoles ,Deadbug,working,2,0.0,20,0,
+2026-01-14,GPT 1 - MiÃ©rcoles ,Scapular row,working,1,0.0,8,0,
+2026-01-14,GPT 1 - MiÃ©rcoles ,Scapular row,working,2,0.0,8,0,
+2026-01-14,GPT 1 - MiÃ©rcoles ,Glute bridge,working,1,0.0,8,0,
+2026-01-14,GPT 1 - MiÃ©rcoles ,Glute bridge,working,2,0.0,8,0,
+2026-01-14,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,135.0,5,0,6.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,185.0,3,0,6.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,225.0,2,0,6.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,1,315.0,3,0,8.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,2,315.0,3,0,8.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,3,320.0,3,0,8.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,4,320.0,3,0,8.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),warmup,0,45.0,10,0,6.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,1,100.0,5,0,8.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,2,100.0,5,0,8.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,3,100.0,5,0,8.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,4,100.0,5,0,8.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),warmup,0,85.0,10,0,7.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,1,175.0,4,0,8.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,2,175.0,4,0,8.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,3,175.0,4,0,8.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,4,175.0,4,0,8.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Rope climb,working,1,0.0,1,0,8.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Rope climb,working,2,0.0,1,0,8.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Rope climb,working,3,0.0,1,0,8.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Rope climb,working,4,0.0,1,0,8.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Rope climb,working,5,0.0,1,0,8.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Rope climb,working,6,0.0,1,0,8.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Rope climb,working,7,0.0,1,0,8.0
+2026-01-14,GPT 1 - MiÃ©rcoles ,Rope climb,working,8,0.0,2,0,9.0
+2026-01-16,GPT 1 - Viernes,Elliptical Machine,working,1,0.0,0,120,
+2026-01-16,GPT 1 - Viernes,Reverse Fly (Cable),working,1,10.0,10,0,
+2026-01-16,GPT 1 - Viernes,Scap Push Ups,working,1,0.0,8,0,
+2026-01-16,GPT 1 - Viernes,Hollow,working,1,0.0,0,20,
+2026-01-16,GPT 1 - Viernes,Hollow,working,2,0.0,0,20,
+2026-01-16,GPT 1 - Viernes,Bench Press (Barbell),warmup,0,45.0,10,0,
+2026-01-16,GPT 1 - Viernes,Bench Press (Barbell),warmup,0,135.0,5,0,7.0
+2026-01-16,GPT 1 - Viernes,Bench Press (Barbell),warmup,0,185.0,3,0,10.0
+2026-01-16,GPT 1 - Viernes,Bench Press (Barbell),warmup,0,135.0,2,0,6.0
+2026-01-16,GPT 1 - Viernes,Front Squat (Barbell),warmup,0,95.0,5,0,9.0
+2026-01-16,GPT 1 - Viernes,Front Squat (Barbell),warmup,0,75.0,3,0,7.0
+2026-01-16,GPT 1 - Viernes,Bench Press (Barbell),working,1,135.0,5,0,7.0
+2026-01-16,GPT 1 - Viernes,Bench Press (Barbell),working,2,145.0,5,0,8.0
+2026-01-16,GPT 1 - Viernes,Bench Press (Barbell),working,3,145.0,5,0,8.0
+2026-01-16,GPT 1 - Viernes,Bench Press (Barbell),working,4,145.0,5,0,8.0
+2026-01-16,GPT 1 - Viernes,Front Squat (Barbell),working,1,95.0,4,0,8.0
+2026-01-16,GPT 1 - Viernes,Front Squat (Barbell),working,2,95.0,4,0,8.0
+2026-01-16,GPT 1 - Viernes,Front Squat (Barbell),working,3,95.0,4,0,8.0
+2026-01-16,GPT 1 - Viernes,Front Squat (Barbell),working,4,95.0,4,0,8.0
+2026-01-16,GPT 1 - Viernes,Chin Up,working,1,22.0,4,0,8.0
+2026-01-16,GPT 1 - Viernes,Chin Up,working,2,22.0,4,0,8.0
+2026-01-16,GPT 1 - Viernes,Chin Up,working,3,25.0,4,0,8.0
+2026-01-16,GPT 1 - Viernes,Chin Up,working,4,25.0,4,0,8.0
+2026-01-16,GPT 1 - Viernes,Weight Hold,working,1,180.0,30,0,
+2026-01-16,GPT 1 - Viernes,Weight Hold,working,2,180.0,30,0,
+2026-01-16,GPT 1 - Viernes,Dead Hang,working,1,0.0,0,30,
+2026-01-16,GPT 1 - Viernes,Dead Hang,working,2,0.0,0,30,
+2026-01-19,GPT 1 - Lunes ,Elliptical Machine,working,1,0.0,0,120,
+2026-01-19,GPT 1 - Lunes ,Worldâ€™s Greatest Stretch,working,1,0.0,8,0,
+2026-01-19,GPT 1 - Lunes ,Balanceo De Pierna,working,1,0.0,10,0,
+2026-01-19,GPT 1 - Lunes ,Balanceo De Pierna,working,2,0.0,10,0,
+2026-01-19,GPT 1 - Lunes ,Air Squat,working,1,0.0,6,0,
+2026-01-19,GPT 1 - Lunes ,Air Squat,working,2,0.0,6,0,
+2026-01-19,GPT 1 - Lunes ,Scap Pull up,working,1,0.0,6,0,
+2026-01-19,GPT 1 - Lunes ,Scap Pull up,working,2,0.0,6,0,
+2026-01-19,GPT 1 - Lunes ,Push Up,working,1,0.0,6,0,
+2026-01-19,GPT 1 - Lunes ,Push Up,working,2,0.0,6,0,
+2026-01-19,GPT 1 - Lunes ,Squat (Barbell),warmup,0,45.0,8,0,6.0
+2026-01-19,GPT 1 - Lunes ,Squat (Barbell),warmup,0,95.0,5,0,6.0
+2026-01-19,GPT 1 - Lunes ,Squat (Barbell),working,1,165.0,4,0,7.0
+2026-01-19,GPT 1 - Lunes ,Squat (Barbell),working,2,165.0,4,0,7.0
+2026-01-19,GPT 1 - Lunes ,Squat (Barbell),working,3,165.0,4,0,7.0
+2026-01-19,GPT 1 - Lunes ,Pull Up,working,1,29.5,3,0,8.0
+2026-01-19,GPT 1 - Lunes ,Pull Up,working,2,29.5,3,0,7.0
+2026-01-19,GPT 1 - Lunes ,Pull Up,working,3,29.5,3,0,7.0
+2026-01-19,GPT 1 - Lunes ,Ring dip,working,1,0.0,3,0,8.0
+2026-01-19,GPT 1 - Lunes ,Ring dip,working,2,0.0,3,0,8.0
+2026-01-19,GPT 1 - Lunes ,Ring dip,working,3,0.0,3,0,7.0
+2026-01-19,GPT 1 - Lunes ,Farmerâ€™s Carry,working,1,180.0,30,0,8.0
+2026-01-19,GPT 1 - Lunes ,Farmerâ€™s Carry,working,2,180.0,30,0,8.0
+2026-01-19,GPT 1 - Lunes ,Farmerâ€™s Carry,working,3,180.0,30,0,8.0
+2026-01-19,GPT 1 - Lunes ,Farmerâ€™s Carry,working,4,180.0,25,0,9.0
+2026-01-19,GPT 1 - Lunes ,Dead Hang,working,1,0.0,0,20,
+2026-01-19,GPT 1 - Lunes ,Dead Hang,working,2,0.0,0,20,
+2026-01-21,GPT 1 - MiÃ©rcoles ,Elliptical Machine,working,1,0.0,0,120,
+2026-01-21,GPT 1 - MiÃ©rcoles ,Hip Hinge W/bar,working,1,45.0,6,0,
+2026-01-21,GPT 1 - MiÃ©rcoles ,Hip Hinge W/bar,working,2,45.0,6,0,
+2026-01-21,GPT 1 - MiÃ©rcoles ,Deadbug,working,1,0.0,20,0,
+2026-01-21,GPT 1 - MiÃ©rcoles ,Deadbug,working,2,0.0,20,0,
+2026-01-21,GPT 1 - MiÃ©rcoles ,Scapular row,working,1,0.0,8,0,
+2026-01-21,GPT 1 - MiÃ©rcoles ,Scapular row,working,2,0.0,8,0,
+2026-01-21,GPT 1 - MiÃ©rcoles ,Glute bridge,working,1,0.0,8,0,
+2026-01-21,GPT 1 - MiÃ©rcoles ,Glute bridge,working,2,0.0,8,0,
+2026-01-21,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,135.0,5,0,6.0
+2026-01-21,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,185.0,3,0,6.0
+2026-01-21,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,225.0,2,0,6.0
+2026-01-21,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,1,295.0,3,0,7.0
+2026-01-21,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,2,295.0,4,0,8.0
+2026-01-21,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,3,295.0,4,0,8.0
+2026-01-21,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),warmup,0,45.0,10,0,6.0
+2026-01-21,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,1,95.0,5,0,7.0
+2026-01-21,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,2,95.0,5,0,7.0
+2026-01-21,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,3,95.0,5,0,7.0
+2026-01-21,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),warmup,0,75.0,10,0,6.0
+2026-01-21,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,1,165.0,4,0,7.0
+2026-01-21,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,2,165.0,4,0,7.0
+2026-01-21,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,3,165.0,4,0,7.0
+2026-01-21,GPT 1 - MiÃ©rcoles ,Rope climb,working,1,0.0,1,0,8.0
+2026-01-21,GPT 1 - MiÃ©rcoles ,Rope climb,working,2,0.0,1,0,8.0
+2026-01-21,GPT 1 - MiÃ©rcoles ,Rope climb,working,3,0.0,1,0,8.0
+2026-01-21,GPT 1 - MiÃ©rcoles ,Rope climb,working,4,0.0,1,0,8.0
+2026-01-21,GPT 1 - MiÃ©rcoles ,Rope climb,working,5,0.0,1,0,8.0
+2026-01-21,GPT 1 - MiÃ©rcoles ,Rope climb,working,6,0.0,1,0,8.0
+2026-01-21,GPT 1 - MiÃ©rcoles ,Rope climb,working,7,0.0,1,0,8.0
+2026-01-21,GPT 1 - MiÃ©rcoles ,Rope climb,working,8,0.0,1,0,8.0
+2026-01-23,GPT 1 - Viernes,Elliptical Machine,working,1,0.0,0,120,
+2026-01-23,GPT 1 - Viernes,Reverse Fly (Cable),working,1,10.0,10,0,
+2026-01-23,GPT 1 - Viernes,Scap Push Ups,working,1,0.0,8,0,
+2026-01-23,GPT 1 - Viernes,Hollow,working,1,0.0,0,20,
+2026-01-23,GPT 1 - Viernes,Hollow,working,2,0.0,0,20,
+2026-01-23,GPT 1 - Viernes,Bench Press (Barbell),warmup,0,45.0,12,0,
+2026-01-23,GPT 1 - Viernes,Bench Press (Barbell),warmup,0,95.0,4,0,6.0
+2026-01-23,GPT 1 - Viernes,Front Squat (Barbell),warmup,0,45.0,8,0,
+2026-01-23,GPT 1 - Viernes,Front Squat (Barbell),warmup,0,75.0,3,0,6.0
+2026-01-23,GPT 1 - Viernes,Bench Press (Barbell),working,1,125.0,3,0,7.0
+2026-01-23,GPT 1 - Viernes,Bench Press (Barbell),working,2,125.0,4,0,8.0
+2026-01-23,GPT 1 - Viernes,Bench Press (Barbell),working,3,125.0,3,0,7.0
+2026-01-23,GPT 1 - Viernes,Front Squat (Barbell),working,1,95.0,3,0,7.0
+2026-01-23,GPT 1 - Viernes,Front Squat (Barbell),working,2,95.0,3,0,7.0
+2026-01-23,GPT 1 - Viernes,Front Squat (Barbell),working,3,95.0,3,0,7.0
+2026-01-23,GPT 1 - Viernes,Chin Up,working,1,18.0,3,0,7.0
+2026-01-23,GPT 1 - Viernes,Chin Up,working,2,18.0,3,0,7.0
+2026-01-23,GPT 1 - Viernes,Chin Up,working,3,18.0,3,0,7.0
+2026-01-23,GPT 1 - Viernes,Weight Hold,working,1,180.0,20,0,
+2026-01-23,GPT 1 - Viernes,Weight Hold,working,2,180.0,20,0,
+2026-01-23,GPT 1 - Viernes,Dead Hang,working,1,0.0,0,20,
+2026-01-26,GPT 1 - Lunes ,Elliptical Machine,working,1,0.0,0,120,
+2026-01-26,GPT 1 - Lunes ,Worldâ€™s Greatest Stretch,working,1,0.0,8,0,
+2026-01-26,GPT 1 - Lunes ,Balanceo De Pierna,working,1,0.0,10,0,
+2026-01-26,GPT 1 - Lunes ,Balanceo De Pierna,working,2,0.0,10,0,
+2026-01-26,GPT 1 - Lunes ,Air Squat,working,1,0.0,6,0,
+2026-01-26,GPT 1 - Lunes ,Air Squat,working,2,0.0,6,0,
+2026-01-26,GPT 1 - Lunes ,Scap Pull up,working,1,0.0,6,0,
+2026-01-26,GPT 1 - Lunes ,Scap Pull up,working,2,0.0,6,0,
+2026-01-26,GPT 1 - Lunes ,Push Up,working,1,0.0,6,0,
+2026-01-26,GPT 1 - Lunes ,Push Up,working,2,0.0,6,0,
+2026-01-26,GPT 1 - Lunes ,Squat (Barbell),warmup,0,45.0,8,0,6.0
+2026-01-26,GPT 1 - Lunes ,Squat (Barbell),warmup,0,95.0,5,0,6.0
+2026-01-26,GPT 1 - Lunes ,Pull Up,warmup,0,0.0,6,0,
+2026-01-26,GPT 1 - Lunes ,Pull Up,warmup,0,10.0,5,0,6.0
+2026-01-26,GPT 1 - Lunes ,Chest Dip,warmup,0,0.0,6,0,
+2026-01-26,GPT 1 - Lunes ,Chest Dip,warmup,0,10.0,5,0,6.0
+2026-01-26,GPT 1 - Lunes ,Squat (Barbell),working,1,175.0,4,0,7.0
+2026-01-26,GPT 1 - Lunes ,Squat (Barbell),working,2,185.0,4,0,8.0
+2026-01-26,GPT 1 - Lunes ,Squat (Barbell),working,3,185.0,4,0,8.0
+2026-01-26,GPT 1 - Lunes ,Squat (Barbell),working,4,185.0,4,0,8.0
+2026-01-26,GPT 1 - Lunes ,Pull Up,working,1,37.0,3,0,8.0
+2026-01-26,GPT 1 - Lunes ,Pull Up,working,2,37.5,3,0,8.0
+2026-01-26,GPT 1 - Lunes ,Pull Up,working,3,37.5,3,0,8.0
+2026-01-26,GPT 1 - Lunes ,Pull Up,working,4,37.5,3,0,8.0
+2026-01-26,GPT 1 - Lunes ,Ring dip,working,1,0.0,5,0,8.0
+2026-01-26,GPT 1 - Lunes ,Ring dip,working,2,0.0,5,0,8.0
+2026-01-26,GPT 1 - Lunes ,Ring dip,working,3,0.0,5,0,8.0
+2026-01-26,GPT 1 - Lunes ,Ring dip,working,4,0.0,5,0,8.0
+2026-01-26,GPT 1 - Lunes ,Farmerâ€™s Carry,working,1,180.0,35,0,8.0
+2026-01-26,GPT 1 - Lunes ,Farmerâ€™s Carry,working,2,180.0,35,0,8.0
+2026-01-26,GPT 1 - Lunes ,Farmerâ€™s Carry,working,3,180.0,39,0,8.0
+2026-01-26,GPT 1 - Lunes ,Farmerâ€™s Carry,working,4,180.0,40,0,8.0
+2026-01-26,GPT 1 - Lunes ,Dead Hang,working,1,0.0,0,30,
+2026-01-26,GPT 1 - Lunes ,Dead Hang,working,2,0.0,0,30,
+2026-01-28,GPT 1 - MiÃ©rcoles ,Elliptical Machine,working,1,0.0,0,120,
+2026-01-28,GPT 1 - MiÃ©rcoles ,Hip Hinge W/bar,working,1,45.0,6,0,
+2026-01-28,GPT 1 - MiÃ©rcoles ,Hip Hinge W/bar,working,2,45.0,6,0,
+2026-01-28,GPT 1 - MiÃ©rcoles ,Deadbug,working,1,0.0,20,0,
+2026-01-28,GPT 1 - MiÃ©rcoles ,Deadbug,working,2,0.0,20,0,
+2026-01-28,GPT 1 - MiÃ©rcoles ,Scapular row,working,1,0.0,8,0,
+2026-01-28,GPT 1 - MiÃ©rcoles ,Scapular row,working,2,0.0,8,0,
+2026-01-28,GPT 1 - MiÃ©rcoles ,Glute bridge,working,1,0.0,8,0,
+2026-01-28,GPT 1 - MiÃ©rcoles ,Glute bridge,working,2,0.0,8,0,
+2026-01-28,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,135.0,5,0,6.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,185.0,3,0,6.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,225.0,2,0,6.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,1,318.0,3,0,8.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,2,318.0,3,0,8.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,3,318.0,3,0,8.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,4,318.0,3,0,8.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),warmup,0,45.0,10,0,6.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,1,105.0,6,0,8.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,2,105.0,6,0,8.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,3,105.0,6,0,8.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,4,105.0,6,0,8.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),warmup,0,75.0,10,0,6.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,1,165.0,6,0,8.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,2,165.0,6,0,8.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,3,165.0,6,0,8.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,4,165.0,6,0,8.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Rope climb,working,1,0.0,1,0,8.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Rope climb,working,2,0.0,1,0,8.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Rope climb,working,3,0.0,1,0,8.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Rope climb,working,4,0.0,1,0,8.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Rope climb,working,5,0.0,1,0,8.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Rope climb,working,6,0.0,1,0,8.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Rope climb,working,7,0.0,1,0,8.0
+2026-01-28,GPT 1 - MiÃ©rcoles ,Rope climb,working,8,0.0,1,0,8.0
+2026-02-03,GPT 1 - Lunes ,Elliptical Machine,working,1,0.0,0,120,
+2026-02-03,GPT 1 - Lunes ,Worldâ€™s Greatest Stretch,working,1,0.0,8,0,
+2026-02-03,GPT 1 - Lunes ,Balanceo De Pierna,working,1,0.0,10,0,
+2026-02-03,GPT 1 - Lunes ,Balanceo De Pierna,working,2,0.0,10,0,
+2026-02-03,GPT 1 - Lunes ,Air Squat,working,1,0.0,6,0,
+2026-02-03,GPT 1 - Lunes ,Air Squat,working,2,0.0,6,0,
+2026-02-03,GPT 1 - Lunes ,Scap Pull up,working,1,0.0,6,0,
+2026-02-03,GPT 1 - Lunes ,Scap Pull up,working,2,0.0,6,0,
+2026-02-03,GPT 1 - Lunes ,Push Up,working,1,0.0,6,0,
+2026-02-03,GPT 1 - Lunes ,Push Up,working,2,0.0,6,0,
+2026-02-03,GPT 1 - Lunes ,Squat (Barbell),warmup,0,45.0,8,0,6.0
+2026-02-03,GPT 1 - Lunes ,Squat (Barbell),warmup,0,95.0,5,0,6.0
+2026-02-03,GPT 1 - Lunes ,Pull Up,warmup,0,0.0,4,0,
+2026-02-03,GPT 1 - Lunes ,Pull Up,warmup,0,10.0,5,0,6.0
+2026-02-03,GPT 1 - Lunes ,Chest Dip,warmup,0,0.0,3,0,
+2026-02-03,GPT 1 - Lunes ,Chest Dip,warmup,0,10.0,5,0,6.0
+2026-02-03,GPT 1 - Lunes ,Squat (Barbell),working,1,185.0,4,0,8.0
+2026-02-03,GPT 1 - Lunes ,Squat (Barbell),working,2,185.0,4,0,8.0
+2026-02-03,GPT 1 - Lunes ,Squat (Barbell),working,3,185.0,4,0,8.0
+2026-02-03,GPT 1 - Lunes ,Squat (Barbell),working,4,185.0,4,0,8.0
+2026-02-03,GPT 1 - Lunes ,Pull Up,working,1,37.5,3,0,8.0
+2026-02-03,GPT 1 - Lunes ,Pull Up,working,2,37.5,3,0,8.0
+2026-02-03,GPT 1 - Lunes ,Pull Up,working,3,37.5,3,0,8.0
+2026-02-03,GPT 1 - Lunes ,Pull Up,working,4,37.5,3,0,8.0
+2026-02-03,GPT 1 - Lunes ,Ring dip,working,1,0.0,5,0,8.0
+2026-02-03,GPT 1 - Lunes ,Ring dip,working,2,0.0,5,0,8.0
+2026-02-03,GPT 1 - Lunes ,Ring dip,working,3,0.0,5,0,8.0
+2026-02-03,GPT 1 - Lunes ,Ring dip,working,4,0.0,5,0,8.0
+2026-02-03,GPT 1 - Lunes ,Farmerâ€™s Carry,working,1,180.0,40,0,8.0
+2026-02-03,GPT 1 - Lunes ,Farmerâ€™s Carry,working,2,180.0,40,0,8.0
+2026-02-03,GPT 1 - Lunes ,Farmerâ€™s Carry,working,3,180.0,40,0,8.0
+2026-02-03,GPT 1 - Lunes ,Farmerâ€™s Carry,working,4,180.0,40,0,9.0
+2026-02-03,GPT 1 - Lunes ,Farmerâ€™s Carry,working,5,180.0,40,0,9.0
+2026-02-03,GPT 1 - Lunes ,Dead Hang,working,1,0.0,0,30,
+2026-02-03,GPT 1 - Lunes ,Dead Hang,working,2,0.0,0,30,
+2026-02-06,GPT 1 - MiÃ©rcoles ,Elliptical Machine,working,1,0.0,0,120,
+2026-02-06,GPT 1 - MiÃ©rcoles ,Hip Hinge W/bar,working,1,45.0,6,0,
+2026-02-06,GPT 1 - MiÃ©rcoles ,Hip Hinge W/bar,working,2,45.0,6,0,
+2026-02-06,GPT 1 - MiÃ©rcoles ,Deadbug,working,1,0.0,20,0,
+2026-02-06,GPT 1 - MiÃ©rcoles ,Deadbug,working,2,0.0,20,0,
+2026-02-06,GPT 1 - MiÃ©rcoles ,Scapular row,working,1,0.0,8,0,
+2026-02-06,GPT 1 - MiÃ©rcoles ,Scapular row,working,2,0.0,8,0,
+2026-02-06,GPT 1 - MiÃ©rcoles ,Glute bridge,working,1,0.0,8,0,
+2026-02-06,GPT 1 - MiÃ©rcoles ,Glute bridge,working,2,0.0,8,0,
+2026-02-06,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,135.0,5,0,6.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,185.0,3,0,6.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,225.0,2,0,6.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,1,318.0,3,0,8.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,2,318.0,3,0,8.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,3,318.0,3,0,8.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,4,318.0,3,0,8.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,5,318.0,3,0,
+2026-02-06,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),warmup,0,45.0,10,0,6.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,1,105.0,6,0,8.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,2,105.0,6,0,8.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,3,105.0,6,0,8.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,4,105.0,6,0,8.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,5,105.0,6,0,8.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),warmup,0,75.0,10,0,6.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,1,165.0,6,0,8.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,2,165.0,6,0,8.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,3,165.0,6,0,8.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,4,165.0,6,0,8.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,5,165.0,6,0,8.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Rope climb,working,1,0.0,1,0,8.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Rope climb,working,2,0.0,1,0,8.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Rope climb,working,3,0.0,1,0,8.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Rope climb,working,4,0.0,1,0,8.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Rope climb,working,5,0.0,1,0,8.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Rope climb,working,6,0.0,1,0,8.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Rope climb,working,7,0.0,1,0,8.0
+2026-02-06,GPT 1 - MiÃ©rcoles ,Rope climb,working,8,0.0,1,0,8.0
+2026-02-09,GPT 1 - Lunes ,Elliptical Machine,working,1,0.0,0,120,
+2026-02-09,GPT 1 - Lunes ,Worldâ€™s Greatest Stretch,working,1,0.0,8,0,
+2026-02-09,GPT 1 - Lunes ,Balanceo De Pierna,working,1,0.0,10,0,
+2026-02-09,GPT 1 - Lunes ,Balanceo De Pierna,working,2,0.0,10,0,
+2026-02-09,GPT 1 - Lunes ,Balanceo De Pierna,working,3,0.0,10,0,
+2026-02-09,GPT 1 - Lunes ,Air Squat,working,1,0.0,6,0,
+2026-02-09,GPT 1 - Lunes ,Air Squat,working,2,0.0,6,0,
+2026-02-09,GPT 1 - Lunes ,Scap Pull up,working,1,0.0,6,0,
+2026-02-09,GPT 1 - Lunes ,Scap Pull up,working,2,0.0,6,0,
+2026-02-09,GPT 1 - Lunes ,Push Up,working,1,0.0,6,0,
+2026-02-09,GPT 1 - Lunes ,Push Up,working,2,0.0,6,0,
+2026-02-09,GPT 1 - Lunes ,Squat (Barbell),warmup,0,45.0,8,0,
+2026-02-09,GPT 1 - Lunes ,Squat (Barbell),warmup,0,95.0,5,0,6.0
+2026-02-09,GPT 1 - Lunes ,Pull Up,warmup,0,0.0,5,0,6.0
+2026-02-09,GPT 1 - Lunes ,Pull Up,warmup,0,22.0,4,0,6.0
+2026-02-09,GPT 1 - Lunes ,Chest Dip,warmup,0,0.0,4,0,6.0
+2026-02-09,GPT 1 - Lunes ,Chest Dip,warmup,0,22.0,4,0,6.0
+2026-02-09,GPT 1 - Lunes ,Squat (Barbell),working,1,190.0,3,0,8.0
+2026-02-09,GPT 1 - Lunes ,Squat (Barbell),working,2,190.0,3,0,8.0
+2026-02-09,GPT 1 - Lunes ,Squat (Barbell),working,3,190.0,3,0,8.0
+2026-02-09,GPT 1 - Lunes ,Squat (Barbell),working,4,190.0,3,0,8.0
+2026-02-09,GPT 1 - Lunes ,Squat (Barbell),working,5,190.0,3,0,8.0
+2026-02-09,GPT 1 - Lunes ,Pull Up,working,1,42.0,3,0,8.0
+2026-02-09,GPT 1 - Lunes ,Pull Up,working,2,42.0,3,0,8.0
+2026-02-09,GPT 1 - Lunes ,Pull Up,working,3,44.0,2,0,8.0
+2026-02-09,GPT 1 - Lunes ,Pull Up,working,4,44.0,3,0,8.0
+2026-02-09,GPT 1 - Lunes ,Pull Up,working,5,44.0,3,0,8.0
+2026-02-09,GPT 1 - Lunes ,Ring dip,working,1,0.0,4,0,8.0
+2026-02-09,GPT 1 - Lunes ,Ring dip,working,2,0.0,4,0,8.0
+2026-02-09,GPT 1 - Lunes ,Ring dip,working,3,0.0,4,0,8.0
+2026-02-09,GPT 1 - Lunes ,Ring dip,working,4,0.0,4,0,8.0
+2026-02-09,GPT 1 - Lunes ,Ring dip,working,5,0.0,4,0,8.0
+2026-02-09,GPT 1 - Lunes ,Farmerâ€™s Carry,working,1,180.0,40,0,8.0
+2026-02-09,GPT 1 - Lunes ,Farmerâ€™s Carry,working,2,180.0,40,0,8.0
+2026-02-09,GPT 1 - Lunes ,Farmerâ€™s Carry,working,3,180.0,40,0,8.0
+2026-02-09,GPT 1 - Lunes ,Farmerâ€™s Carry,working,4,180.0,40,0,8.0
+2026-02-09,GPT 1 - Lunes ,Dead Hang,working,1,0.0,0,28,
+2026-02-09,GPT 1 - Lunes ,Dead Hang,working,2,0.0,0,30,
+2026-02-11,GPT 1 - MiÃ©rcoles ,Elliptical Machine,working,1,0.0,0,120,
+2026-02-11,GPT 1 - MiÃ©rcoles ,Hip Hinge W/bar,working,1,45.0,6,0,
+2026-02-11,GPT 1 - MiÃ©rcoles ,Hip Hinge W/bar,working,2,45.0,6,0,
+2026-02-11,GPT 1 - MiÃ©rcoles ,Deadbug,working,1,0.0,20,0,
+2026-02-11,GPT 1 - MiÃ©rcoles ,Deadbug,working,2,0.0,20,0,
+2026-02-11,GPT 1 - MiÃ©rcoles ,Scapular row,working,1,0.0,8,0,
+2026-02-11,GPT 1 - MiÃ©rcoles ,Scapular row,working,2,0.0,8,0,
+2026-02-11,GPT 1 - MiÃ©rcoles ,Glute bridge,working,1,0.0,8,0,
+2026-02-11,GPT 1 - MiÃ©rcoles ,Glute bridge,working,2,0.0,8,0,
+2026-02-11,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,135.0,5,0,6.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,185.0,3,0,6.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,225.0,2,0,6.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,1,318.0,2,0,7.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,2,323.0,2,0,8.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,3,328.0,2,0,8.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,4,328.0,2,0,8.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,5,328.0,2,0,8.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,6,328.0,2,0,8.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),warmup,0,45.0,10,0,6.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,1,105.0,4,0,7.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,2,110.0,4,0,8.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,3,110.0,4,0,8.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,4,110.0,4,0,8.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,5,110.0,4,0,8.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,6,110.0,4,0,8.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),warmup,0,75.0,10,0,6.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,1,165.0,4,0,7.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,2,175.0,4,0,8.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,3,175.0,4,0,8.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,4,175.0,4,0,8.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,5,175.0,4,0,8.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,6,175.0,4,0,8.0
+2026-02-11,GPT 1 - MiÃ©rcoles ,Rope climb,working,1,0.0,1,0,
+2026-02-11,GPT 1 - MiÃ©rcoles ,Rope climb,working,2,0.0,1,0,
+2026-02-11,GPT 1 - MiÃ©rcoles ,Rope climb,working,3,0.0,1,0,
+2026-02-11,GPT 1 - MiÃ©rcoles ,Rope climb,working,4,0.0,1,0,
+2026-02-11,GPT 1 - MiÃ©rcoles ,Rope climb,working,5,0.0,1,0,
+2026-02-11,GPT 1 - MiÃ©rcoles ,Rope climb,working,6,0.0,1,0,
+2026-02-13,GPT 1 - Viernes,Elliptical Machine,working,1,0.0,0,120,
+2026-02-13,GPT 1 - Viernes,Reverse Fly (Cable),working,1,10.0,10,0,
+2026-02-13,GPT 1 - Viernes,Scap Push Ups,working,1,0.0,8,0,
+2026-02-13,GPT 1 - Viernes,Hollow,working,1,0.0,0,20,
+2026-02-13,GPT 1 - Viernes,Hollow,working,2,0.0,0,20,
+2026-02-13,GPT 1 - Viernes,Bench Press (Barbell),warmup,0,45.0,10,0,
+2026-02-13,GPT 1 - Viernes,Bench Press (Barbell),warmup,0,95.0,4,0,6.0
+2026-02-13,GPT 1 - Viernes,Front Squat (Barbell),warmup,0,45.0,6,0,6.0
+2026-02-13,GPT 1 - Viernes,Front Squat (Barbell),warmup,0,75.0,4,0,6.0
+2026-02-13,GPT 1 - Viernes,Bench Press (Barbell),working,1,135.0,5,0,7.0
+2026-02-13,GPT 1 - Viernes,Bench Press (Barbell),working,2,145.0,5,0,7.0
+2026-02-13,GPT 1 - Viernes,Bench Press (Barbell),working,3,155.0,5,0,8.0
+2026-02-13,GPT 1 - Viernes,Bench Press (Barbell),working,4,155.0,5,0,8.0
+2026-02-13,GPT 1 - Viernes,Front Squat (Barbell),working,1,95.0,4,0,8.0
+2026-02-13,GPT 1 - Viernes,Front Squat (Barbell),working,2,95.0,4,0,8.0
+2026-02-13,GPT 1 - Viernes,Front Squat (Barbell),working,3,95.0,4,0,8.0
+2026-02-13,GPT 1 - Viernes,Front Squat (Barbell),working,4,95.0,4,0,8.0
+2026-02-13,GPT 1 - Viernes,Chin Up,working,1,22.0,4,0,8.0
+2026-02-13,GPT 1 - Viernes,Chin Up,working,2,22.0,4,0,8.0
+2026-02-13,GPT 1 - Viernes,Chin Up,working,3,26.0,4,0,8.0
+2026-02-13,GPT 1 - Viernes,Chin Up,working,4,26.0,4,0,8.0
+2026-02-13,GPT 1 - Viernes,Weight Hold,working,1,180.0,30,0,
+2026-02-13,GPT 1 - Viernes,Weight Hold,working,2,180.0,30,0,
+2026-02-13,GPT 1 - Viernes,Dead Hang,working,1,0.0,0,30,
+2026-02-13,GPT 1 - Viernes,Dead Hang,working,2,0.0,0,30,
+2026-02-16,GPT 1 - Lunes ,Elliptical Machine,working,1,0.0,0,120,
+2026-02-16,GPT 1 - Lunes ,Worldâ€™s Greatest Stretch,working,1,0.0,8,0,
+2026-02-16,GPT 1 - Lunes ,Balanceo De Pierna,working,1,0.0,10,0,
+2026-02-16,GPT 1 - Lunes ,Balanceo De Pierna,working,2,0.0,10,0,
+2026-02-16,GPT 1 - Lunes ,Balanceo De Pierna,working,3,0.0,10,0,
+2026-02-16,GPT 1 - Lunes ,Air Squat,working,1,0.0,6,0,
+2026-02-16,GPT 1 - Lunes ,Air Squat,working,2,0.0,6,0,
+2026-02-16,GPT 1 - Lunes ,Scap Pull up,working,1,0.0,6,0,
+2026-02-16,GPT 1 - Lunes ,Scap Pull up,working,2,0.0,6,0,
+2026-02-16,GPT 1 - Lunes ,Push Up,working,1,0.0,6,0,
+2026-02-16,GPT 1 - Lunes ,Push Up,working,2,0.0,6,0,
+2026-02-16,GPT 1 - Lunes ,Squat (Barbell),warmup,0,45.0,8,0,
+2026-02-16,GPT 1 - Lunes ,Squat (Barbell),warmup,0,95.0,5,0,
+2026-02-16,GPT 1 - Lunes ,Pull Up,warmup,0,0.0,5,0,
+2026-02-16,GPT 1 - Lunes ,Pull Up,warmup,0,22.0,4,0,
+2026-02-16,GPT 1 - Lunes ,Chest Dip,warmup,0,0.0,4,0,
+2026-02-16,GPT 1 - Lunes ,Chest Dip,warmup,0,22.0,4,0,
+2026-02-16,GPT 1 - Lunes ,Squat (Barbell),working,1,160.0,4,0,7.0
+2026-02-16,GPT 1 - Lunes ,Squat (Barbell),working,2,160.0,4,0,7.0
+2026-02-16,GPT 1 - Lunes ,Squat (Barbell),working,3,160.0,4,0,7.0
+2026-02-16,GPT 1 - Lunes ,Pull Up,working,1,35.0,3,0,7.0
+2026-02-16,GPT 1 - Lunes ,Pull Up,working,2,35.0,3,0,7.0
+2026-02-16,GPT 1 - Lunes ,Pull Up,working,3,35.0,3,0,7.0
+2026-02-16,GPT 1 - Lunes ,Ring dip,working,1,0.0,3,0,7.0
+2026-02-16,GPT 1 - Lunes ,Ring dip,working,2,0.0,3,0,7.0
+2026-02-16,GPT 1 - Lunes ,Ring dip,working,3,0.0,3,0,7.0
+2026-02-16,GPT 1 - Lunes ,Farmerâ€™s Carry,working,1,160.0,30,0,7.0
+2026-02-16,GPT 1 - Lunes ,Farmerâ€™s Carry,working,2,160.0,30,0,7.0
+2026-02-16,GPT 1 - Lunes ,Dead Hang,working,1,0.0,0,30,
+2026-02-16,GPT 1 - Lunes ,Dead Hang,working,2,0.0,0,30,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Elliptical Machine,working,1,0.0,0,120,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Hip Hinge W/bar,working,1,45.0,6,0,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Hip Hinge W/bar,working,2,45.0,6,0,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Deadbug,working,1,0.0,20,0,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Deadbug,working,2,0.0,20,0,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Scapular row,working,1,0.0,8,0,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Scapular row,working,2,0.0,8,0,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Glute bridge,working,1,0.0,8,0,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Glute bridge,working,2,0.0,8,0,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,135.0,5,0,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,185.0,3,0,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,225.0,2,0,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),warmup,0,275.0,1,0,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,1,295.0,3,0,7.0
+2026-02-18,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,2,295.0,3,0,7.0
+2026-02-18,GPT 1 - MiÃ©rcoles ,Deadlift (Barbell),working,3,295.0,3,0,7.0
+2026-02-18,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),warmup,0,45.0,10,0,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),warmup,0,75.0,5,0,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),warmup,0,95.0,2,0,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,1,100.0,5,0,7.0
+2026-02-18,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,2,100.0,5,0,7.0
+2026-02-18,GPT 1 - MiÃ©rcoles ,Overhead Press (Barbell),working,3,100.0,5,0,7.0
+2026-02-18,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),warmup,0,75.0,10,0,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),warmup,0,135.0,5,0,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),warmup,0,155.0,2,0,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,1,165.0,5,0,7.0
+2026-02-18,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,2,165.0,5,0,7.0
+2026-02-18,GPT 1 - MiÃ©rcoles ,Bent Over Row (Barbell),working,3,165.0,5,0,7.0
+2026-02-18,GPT 1 - MiÃ©rcoles ,Rope climb,working,1,0.0,1,0,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Rope climb,working,2,0.0,1,0,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Rope climb,working,3,0.0,1,0,
+2026-02-18,GPT 1 - MiÃ©rcoles ,Rope climb,working,4,0.0,1,0,
+2026-02-20,GPT 1 - Viernes,Elliptical Machine,working,1,0.0,0,120,
+2026-02-20,GPT 1 - Viernes,Reverse Fly (Cable),working,1,10.0,10,0,
+2026-02-20,GPT 1 - Viernes,Scap Push Ups,working,1,0.0,8,0,
+2026-02-20,GPT 1 - Viernes,Hollow,working,1,0.0,0,20,
+2026-02-20,GPT 1 - Viernes,Hollow,working,2,0.0,0,20,
+2026-02-20,GPT 1 - Viernes,Bench Press (Barbell),warmup,0,45.0,10,0,6.0
+2026-02-20,GPT 1 - Viernes,Bench Press (Barbell),warmup,0,95.0,6,0,6.0
+2026-02-20,GPT 1 - Viernes,Front Squat (Barbell),warmup,0,45.0,6,0,6.0
+2026-02-20,GPT 1 - Viernes,Front Squat (Barbell),warmup,0,75.0,4,0,6.0
+2026-02-20,GPT 1 - Viernes,Chin Up,warmup,0,0.0,6,0,6.0
+2026-02-20,GPT 1 - Viernes,Chin Up,warmup,0,10.0,4,0,6.0
+2026-02-20,GPT 1 - Viernes,Bench Press (Barbell),working,1,145.0,5,0,7.0
+2026-02-20,GPT 1 - Viernes,Bench Press (Barbell),working,2,145.0,5,0,7.0
+2026-02-20,GPT 1 - Viernes,Bench Press (Barbell),working,3,145.0,5,0,7.0
+2026-02-20,GPT 1 - Viernes,Front Squat (Barbell),working,1,85.0,4,0,7.0
+2026-02-20,GPT 1 - Viernes,Front Squat (Barbell),working,2,85.0,4,0,7.0
+2026-02-20,GPT 1 - Viernes,Front Squat (Barbell),working,3,85.0,4,0,7.0
+2026-02-20,GPT 1 - Viernes,Chin Up,working,1,22.0,3,0,7.0
+2026-02-20,GPT 1 - Viernes,Chin Up,working,2,22.0,3,0,7.0
+2026-02-20,GPT 1 - Viernes,Chin Up,working,3,22.0,3,0,7.0
+2026-02-20,GPT 1 - Viernes,Weight Hold,working,1,180.0,30,0,
+2026-02-20,GPT 1 - Viernes,Weight Hold,working,2,180.0,30,0,
