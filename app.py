@@ -13,6 +13,36 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# --- Helpers ---
+def normalize_exercise_name(name):
+    """Normalize exercise names for matching between Strong and plan."""
+    if pd.isna(name):
+        return ""
+    name = str(name)
+    # Fix UTF-8 mojibake: â€™ → '
+    name = name.replace("\u00e2\u20ac\u2122", "'")
+    name = name.replace("\u2019", "'")
+    name = name.strip()
+    return name
+
+
+def parse_rpe_target_max(val):
+    """Parse RPE target string to max value. '7.5-8' → 8.0, '8' → 8.0."""
+    if pd.isna(val) or str(val).strip() == "":
+        return None
+    val = str(val).strip()
+    if "-" in val:
+        parts = val.split("-")
+        try:
+            return max(float(parts[0]), float(parts[1]))
+        except ValueError:
+            return None
+    try:
+        return float(val)
+    except ValueError:
+        return None
+
+
 # --- Data Loading ---
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 
@@ -40,15 +70,42 @@ def load_data():
     daily["week"] = daily["date"].dt.isocalendar().week
     daily["year"] = daily["date"].dt.year
 
-    return workouts, daily, body, activity, weekly, vo2
+    # Strong log (gym set-level data)
+    strong_path = os.path.join(DATA_DIR, "strong_log.csv")
+    if os.path.exists(strong_path):
+        strong = pd.read_csv(strong_path)
+        strong["date"] = pd.to_datetime(strong["date"])
+        strong["date_only"] = strong["date"].dt.date
+        strong["exercise_norm"] = strong["exercise"].apply(normalize_exercise_name)
+        strong["week"] = strong["date"].dt.isocalendar().week
+        strong["year"] = strong["date"].dt.year
+        strong["year_week"] = strong["date"].dt.strftime("%Y-W%U")
+        strong["volume_lb"] = strong["weight_lb"] * strong["reps"]
+    else:
+        strong = pd.DataFrame()
 
-workouts, daily, body, activity, weekly, vo2 = load_data()
+    # Training plan (weekly prescription)
+    plan_path = os.path.join(DATA_DIR, "training_plan.csv")
+    if os.path.exists(plan_path):
+        plan = pd.read_csv(plan_path, on_bad_lines="skip")
+        plan["fecha"] = pd.to_datetime(plan["fecha"])
+        plan["date_only"] = plan["fecha"].dt.date
+        plan["exercise_norm"] = plan["ejercicio"].apply(normalize_exercise_name)
+        plan["rpe_target_max"] = plan["rpe_target"].apply(parse_rpe_target_max)
+    else:
+        plan = pd.DataFrame()
+
+    return workouts, daily, body, activity, weekly, vo2, strong, plan
+
+workouts, daily, body, activity, weekly, vo2, strong, plan = load_data()
 
 # --- Sidebar ---
 st.sidebar.title("🏋️ Health Dashboard")
 page = st.sidebar.radio("Página", [
     "📊 Resumen Semanal",
     "🏃 Running Analytics",
+    "🏋️ Fuerza Analytics",
+    "🎯 Adherencia",
     "❤️ Tendencias de Salud",
     "⚖️ Composición Corporal",
     "📈 Métricas Acumuladas",
@@ -258,6 +315,374 @@ elif page == "🏃 Running Analytics":
         display["Fecha"] = display["Fecha"].dt.strftime("%Y-%m-%d %H:%M")
         display["Pace"] = display["Pace"].apply(lambda x: f"{x:.1f}" if pd.notna(x) else "")
         st.dataframe(display, use_container_width=True, hide_index=True)
+
+
+# ============================================================
+# PAGE: FUERZA ANALYTICS
+# ============================================================
+elif page == "🏋️ Fuerza Analytics":
+    st.title("🏋️ Fuerza Analytics")
+
+    if strong.empty:
+        st.warning("No hay datos de Strong App. Asegúrate de que `data/strong_log.csv` exista.")
+    else:
+        # --- Exercise filter ---
+        exercises = sorted(strong["exercise_norm"].unique())
+        exercise_filter = st.selectbox("Ejercicio", ["Todos"] + exercises)
+
+        if exercise_filter == "Todos":
+            sf = strong.copy()
+        else:
+            sf = strong[strong["exercise_norm"] == exercise_filter].copy()
+
+        working = sf[sf["set_type"] == "working"]
+
+        # --- KPIs ---
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            st.metric("Sesiones Fuerza", sf["date_only"].nunique())
+        with col2:
+            vol = working["volume_lb"].sum()
+            st.metric("Volumen Total (lb)", f"{vol:,.0f}")
+        with col3:
+            if len(working) > 0 and working["weight_lb"].max() > 0:
+                pr_row = working.loc[working["weight_lb"].idxmax()]
+                st.metric("PR Peso", f"{pr_row['weight_lb']:.0f} lb",
+                          delta=pr_row["exercise_norm"] if exercise_filter == "Todos" else None)
+            else:
+                st.metric("PR Peso", "N/A")
+        with col4:
+            st.metric("Ejercicios Distintos", sf["exercise_norm"].nunique())
+
+        st.markdown("---")
+
+        # --- Tabs ---
+        tab_prog, tab_vol, tab_rpe, tab_sess, tab_records = st.tabs(
+            ["📈 Progresión", "📊 Volumen", "🎯 RPE", "💓 Sesiones", "🏆 Records"]
+        )
+
+        # ---- Tab: Progresión ----
+        with tab_prog:
+            st.subheader("Progresión de peso máximo por sesión")
+            if exercise_filter == "Todos":
+                # Top 5 exercises by total volume
+                top5 = (working.groupby("exercise_norm")["volume_lb"]
+                        .sum().nlargest(5).index.tolist())
+                prog_data = (working[working["exercise_norm"].isin(top5)]
+                             .groupby(["date_only", "exercise_norm"])["weight_lb"]
+                             .max().reset_index())
+                fig = px.line(prog_data, x="date_only", y="weight_lb",
+                              color="exercise_norm", markers=True,
+                              labels={"date_only": "", "weight_lb": "Peso (lb)",
+                                      "exercise_norm": "Ejercicio"})
+                fig.update_layout(xaxis_title="", yaxis_title="Peso (lb)")
+                st.plotly_chart(fig, use_container_width=True)
+            else:
+                prog_data = (working.groupby("date_only")["weight_lb"]
+                             .max().reset_index())
+                if len(prog_data) > 0:
+                    prog_data["ma_5"] = prog_data["weight_lb"].rolling(5, min_periods=2).mean()
+                    fig = go.Figure()
+                    fig.add_trace(go.Scatter(
+                        x=prog_data["date_only"], y=prog_data["weight_lb"],
+                        mode="markers", name="Peso máx", marker=dict(size=7, color="#4ECDC4")))
+                    fig.add_trace(go.Scatter(
+                        x=prog_data["date_only"], y=prog_data["ma_5"],
+                        mode="lines", name="Media móvil (5)",
+                        line=dict(color="#FF6B6B", width=2)))
+                    fig.update_layout(xaxis_title="", yaxis_title="Peso (lb)")
+                    st.plotly_chart(fig, use_container_width=True)
+                else:
+                    st.info("No hay datos de working sets para este ejercicio.")
+
+        # ---- Tab: Volumen ----
+        with tab_vol:
+            st.subheader("Volumen semanal (peso × reps)")
+            vol_week = (working.groupby("year_week").agg(
+                volume=("volume_lb", "sum"),
+                sets=("reps", "count"),
+                reps=("reps", "sum"),
+            ).reset_index())
+
+            fig = px.bar(vol_week, x="year_week", y="volume",
+                         color_discrete_sequence=["#4ECDC4"],
+                         labels={"year_week": "", "volume": "Volumen (lb)"})
+            fig.update_layout(xaxis_title="", yaxis_title="Volumen (lb)")
+            st.plotly_chart(fig, use_container_width=True)
+
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("Sets Totales", f"{len(working):,}")
+            with col2:
+                st.metric("Reps Totales", f"{working['reps'].sum():,}")
+            with col3:
+                avg_vol = vol_week["volume"].mean() if len(vol_week) > 0 else 0
+                st.metric("Volumen Prom/Semana", f"{avg_vol:,.0f} lb")
+
+        # ---- Tab: RPE ----
+        with tab_rpe:
+            st.subheader("RPE por sesión")
+            rpe_data = working[working["rpe_actual"].notna()].copy()
+            if len(rpe_data) > 0:
+                rpe_session = (rpe_data.groupby("date_only")["rpe_actual"]
+                               .mean().reset_index())
+                rpe_session["ma_5"] = rpe_session["rpe_actual"].rolling(5, min_periods=2).mean()
+
+                fig = go.Figure()
+                fig.add_trace(go.Scatter(
+                    x=rpe_session["date_only"], y=rpe_session["rpe_actual"],
+                    mode="markers", name="RPE promedio sesión",
+                    marker=dict(size=6, color="#FFEAA7")))
+                fig.add_trace(go.Scatter(
+                    x=rpe_session["date_only"], y=rpe_session["ma_5"],
+                    mode="lines", name="Media móvil (5)",
+                    line=dict(color="#E17055", width=2)))
+                fig.update_layout(xaxis_title="", yaxis_title="RPE",
+                                  yaxis_range=[5, 10])
+                st.plotly_chart(fig, use_container_width=True)
+
+                # RPE distribution histogram
+                st.subheader("Distribución de RPE")
+                fig = px.histogram(rpe_data, x="rpe_actual", nbins=15,
+                                   color_discrete_sequence=["#E17055"],
+                                   labels={"rpe_actual": "RPE"})
+                fig.update_layout(xaxis_title="RPE", yaxis_title="Frecuencia")
+                st.plotly_chart(fig, use_container_width=True)
+            else:
+                st.info("No hay datos de RPE registrados en Strong.")
+
+        # ---- Tab: Sesiones (HR from workouts.csv) ----
+        with tab_sess:
+            st.subheader("Frecuencia cardíaca en sesiones de fuerza")
+            strength_types = ["TraditionalStrengthTraining", "FunctionalStrengthTraining", "CoreTraining"]
+            strength_wo = w_filtered[w_filtered["activity_type"].isin(strength_types)].copy()
+
+            if len(strength_wo) == 0:
+                st.info("No hay sesiones de fuerza en Apple Health para el rango seleccionado.")
+            else:
+                # HR chart
+                hr_cols = strength_wo[["start_date", "hr_avg", "hr_max"]].dropna(subset=["hr_avg"])
+                if len(hr_cols) > 0:
+                    fig = go.Figure()
+                    fig.add_trace(go.Scatter(
+                        x=hr_cols["start_date"], y=hr_cols["hr_avg"],
+                        mode="lines+markers", name="HR Avg",
+                        line=dict(color="#E74C3C", width=2), marker=dict(size=4)))
+                    fig.add_trace(go.Scatter(
+                        x=hr_cols["start_date"], y=hr_cols["hr_max"],
+                        mode="lines+markers", name="HR Max",
+                        line=dict(color="#C0392B", width=1, dash="dot"), marker=dict(size=3)))
+                    fig.update_layout(xaxis_title="", yaxis_title="BPM")
+                    st.plotly_chart(fig, use_container_width=True)
+
+                # Duration by type
+                st.subheader("Duración por tipo de fuerza")
+                dur_type = strength_wo.groupby("activity_type")["duration_min"].mean().reset_index()
+                dur_type.columns = ["Tipo", "Duración Promedio (min)"]
+                fig = px.bar(dur_type, x="Tipo", y="Duración Promedio (min)",
+                             color_discrete_sequence=["#45B7D1"])
+                st.plotly_chart(fig, use_container_width=True)
+
+                # Summary metrics
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    st.metric("Duración Prom", f"{strength_wo['duration_min'].mean():.0f} min")
+                with col2:
+                    hr_mean = strength_wo["hr_avg"].mean()
+                    st.metric("HR Prom", f"{hr_mean:.0f} bpm" if pd.notna(hr_mean) else "N/A")
+                with col3:
+                    mets = strength_wo["avg_mets"].mean()
+                    st.metric("METs Prom", f"{mets:.1f}" if pd.notna(mets) else "N/A")
+
+        # ---- Tab: Records ----
+        with tab_records:
+            st.subheader("Records personales")
+            if len(working) > 0:
+                records = (working.groupby("exercise_norm").agg(
+                    pr_lb=("weight_lb", "max"),
+                    total_sets=("reps", "count"),
+                    total_sessions=("date_only", "nunique"),
+                ).reset_index())
+                # Get PR date for each exercise
+                pr_dates = (working.loc[working.groupby("exercise_norm")["weight_lb"]
+                            .idxmax()][["exercise_norm", "date_only"]]
+                            .rename(columns={"date_only": "pr_date"}))
+                records = records.merge(pr_dates, on="exercise_norm", how="left")
+                records = records.sort_values("pr_lb", ascending=False)
+                records.columns = ["Ejercicio", "PR (lb)", "Sets Totales",
+                                   "Sesiones", "Fecha PR"]
+
+                st.dataframe(records, use_container_width=True, hide_index=True)
+
+                # Top 15 exercises by frequency
+                st.subheader("Top 15 ejercicios por frecuencia")
+                top_freq = (working.groupby("exercise_norm")["date_only"].nunique()
+                            .nlargest(15).reset_index())
+                top_freq.columns = ["Ejercicio", "Sesiones"]
+                fig = px.bar(top_freq, x="Sesiones", y="Ejercicio", orientation="h",
+                             color_discrete_sequence=["#4ECDC4"])
+                fig.update_layout(yaxis=dict(autorange="reversed"), xaxis_title="Sesiones",
+                                  yaxis_title="", height=500)
+                st.plotly_chart(fig, use_container_width=True)
+            else:
+                st.info("No hay working sets para mostrar records.")
+
+
+# ============================================================
+# PAGE: ADHERENCIA
+# ============================================================
+elif page == "🎯 Adherencia":
+    st.title("🎯 Adherencia — Plan vs Realidad")
+
+    if plan.empty:
+        st.warning("No hay plan de entrenamiento. Asegúrate de que `data/training_plan.csv` exista.")
+    elif strong.empty:
+        st.warning("No hay datos de Strong App para comparar con el plan.")
+    else:
+        # Check date overlap
+        plan_dates = set(plan["date_only"].unique())
+        strong_dates = set(strong["date_only"].unique())
+        overlap_dates = plan_dates & strong_dates
+
+        if len(overlap_dates) == 0:
+            # No overlap — show plan only
+            st.info(
+                "📅 **Aún no hay overlap de fechas entre el plan y los datos de Strong.**\n\n"
+                f"- Plan: {min(plan_dates)} a {max(plan_dates)}\n"
+                f"- Strong: {min(strong_dates)} a {max(strong_dates)}\n\n"
+                "Cuando actualices la exportación de Strong, se mostrarán las comparaciones "
+                "plan vs realidad automáticamente."
+            )
+
+            st.markdown("---")
+            st.subheader("📋 Plan semanal (referencia)")
+
+            # Show plan grouped by day
+            day_names = {
+                "lunes": "🟢 Lunes", "martes": "🟢 Martes", "miércoles": "🟢 Miércoles",
+                "jueves": "🟢 Jueves", "viernes": "🟢 Viernes", "sábado": "🟢 Sábado",
+                "domingo": "🟢 Domingo",
+            }
+
+            plan_days = plan["dia"].unique() if "dia" in plan.columns else []
+            for day in sorted(plan_days, key=lambda d: list(day_names.keys()).index(d.lower()) if d.lower() in day_names else 99):
+                day_label = day_names.get(day.lower(), day)
+                day_data = plan[plan["dia"] == day]
+
+                with st.expander(f"{day_label} — {day_data['sesion'].iloc[0] if 'sesion' in day_data.columns else ''}", expanded=False):
+                    display = day_data[["ejercicio", "serie", "peso_lb", "reps",
+                                        "rpe_target", "descanso_seg"]].copy()
+                    display.columns = ["Ejercicio", "Series", "Peso (lb)", "Reps",
+                                       "RPE Target", "Descanso (s)"]
+                    st.dataframe(display, use_container_width=True, hide_index=True)
+
+        else:
+            # Has overlap — show full comparison
+            overlap_min = min(overlap_dates)
+            overlap_max = max(overlap_dates)
+
+            st.success(f"Comparando datos del {overlap_min} al {overlap_max}")
+
+            # Filter to overlap period
+            plan_overlap = plan[plan["date_only"].isin(overlap_dates)].copy()
+            strong_overlap = strong[strong["date_only"].isin(overlap_dates)].copy()
+
+            # Merge plan vs strong
+            plan_exercises = (plan_overlap.groupby(["date_only", "exercise_norm"]).agg(
+                sets_plan=("serie", "count"),
+                weight_plan=("peso_lb", "max"),
+                reps_plan=("reps", "max"),
+                rpe_plan=("rpe_target_max", "max"),
+            ).reset_index())
+
+            strong_exercises = (strong_overlap[strong_overlap["set_type"] == "working"]
+                                .groupby(["date_only", "exercise_norm"]).agg(
+                sets_real=("set_num", "count"),
+                weight_real=("weight_lb", "max"),
+                reps_real=("reps", "max"),
+                rpe_real=("rpe_actual", "mean"),
+            ).reset_index())
+
+            comparison = plan_exercises.merge(
+                strong_exercises,
+                on=["date_only", "exercise_norm"],
+                how="left",
+            )
+
+            # Classify status
+            def classify_adherence(row):
+                if pd.isna(row.get("sets_real")):
+                    return "❌ No hecho"
+                ratio = row["sets_real"] / row["sets_plan"] if row["sets_plan"] > 0 else 0
+                if ratio >= 0.8:
+                    return "✅ Completado"
+                return "⚠️ Parcial"
+
+            comparison["estado"] = comparison.apply(classify_adherence, axis=1)
+
+            # KPIs
+            total_exercises = len(comparison)
+            completed = len(comparison[comparison["estado"] == "✅ Completado"])
+            partial = len(comparison[comparison["estado"] == "⚠️ Parcial"])
+            missed = len(comparison[comparison["estado"] == "❌ No hecho"])
+            adherence_pct = ((completed + partial * 0.5) / total_exercises * 100
+                             if total_exercises > 0 else 0)
+
+            col1, col2, col3, col4 = st.columns(4)
+            with col1:
+                st.metric("% Adherencia", f"{adherence_pct:.0f}%")
+            with col2:
+                plan_sessions = plan_overlap["date_only"].nunique()
+                real_sessions = strong_overlap["date_only"].nunique()
+                st.metric("Sesiones", f"{real_sessions}/{plan_sessions}")
+            with col3:
+                st.metric("Ejercicios", f"{completed}/{total_exercises}")
+            with col4:
+                rpe_diff = (comparison["rpe_real"].mean() - comparison["rpe_plan"].mean())
+                st.metric("RPE Δ (Real − Plan)",
+                          f"{rpe_diff:+.1f}" if pd.notna(rpe_diff) else "N/A")
+
+            st.markdown("---")
+
+            # Weekly traffic light
+            st.subheader("Semáforo semanal")
+            days_es = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
+            cols = st.columns(7)
+
+            for i, day_name in enumerate(days_es):
+                with cols[i]:
+                    day_comp = comparison[
+                        comparison["date_only"].apply(
+                            lambda d: d.strftime("%A").lower() == {
+                                "lunes": "monday", "martes": "tuesday",
+                                "miércoles": "wednesday", "jueves": "thursday",
+                                "viernes": "friday", "sábado": "saturday",
+                                "domingo": "sunday",
+                            }.get(day_name, "")
+                        )
+                    ]
+                    if len(day_comp) == 0:
+                        st.markdown(f"**{day_name[:3].title()}**\n\n⚪ Sin plan")
+                    else:
+                        done_ratio = len(day_comp[day_comp["estado"] == "✅ Completado"]) / len(day_comp)
+                        if done_ratio >= 0.8:
+                            emoji = "🟢"
+                        elif done_ratio > 0:
+                            emoji = "🟡"
+                        else:
+                            emoji = "🔴"
+                        st.markdown(f"**{day_name[:3].title()}**\n\n{emoji} {done_ratio:.0%}")
+
+            st.markdown("---")
+
+            # Detail table
+            st.subheader("Detalle de ejercicios")
+            detail = comparison[["date_only", "exercise_norm", "weight_plan", "weight_real",
+                                 "reps_plan", "reps_real", "rpe_plan", "rpe_real", "estado"]].copy()
+            detail.columns = ["Fecha", "Ejercicio", "Peso Plan", "Peso Real",
+                              "Reps Plan", "Reps Real", "RPE Plan", "RPE Real", "Estado"]
+            detail = detail.sort_values(["Fecha", "Ejercicio"])
+            st.dataframe(detail, use_container_width=True, hide_index=True)
 
 
 # ============================================================
@@ -520,3 +945,5 @@ elif page == "📈 Métricas Acumuladas":
 st.sidebar.markdown("---")
 st.sidebar.caption(f"Datos hasta: {workouts['start_date'].max().strftime('%Y-%m-%d')}")
 st.sidebar.caption(f"Workouts: {len(workouts):,} | Días: {len(daily):,}")
+if not strong.empty:
+    st.sidebar.caption(f"Strong: {len(strong):,} sets | {strong['date_only'].nunique()} sesiones")
