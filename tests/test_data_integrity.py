@@ -118,3 +118,112 @@ class TestStrongLog:
 
     def test_weight_non_negative(self, strong_log):
         assert (strong_log["weight_lb"] >= 0).all(), "Found negative weight"
+
+
+class TestTrainingPlan:
+    """Training plan CSV must have expected columns and valid data."""
+
+    REQUIRED_COLUMNS = [
+        "fecha", "dia", "sesion", "ejercicio", "serie",
+        "peso_lb", "reps", "rpe_target",
+    ]
+
+    @pytest.fixture(autouse=True)
+    def load_plan(self):
+        filepath = os.path.join(DATA_DIR, "training_plan.csv")
+        self.plan = pd.read_csv(filepath, on_bad_lines="skip")
+
+    def test_has_required_columns(self):
+        for col in self.REQUIRED_COLUMNS:
+            assert col in self.plan.columns, f"Missing column: {col}"
+
+    def test_dates_parseable(self):
+        dates = pd.to_datetime(self.plan["fecha"], errors="coerce")
+        assert dates.notna().all(), "Some fecha values cannot be parsed as dates"
+
+    def test_at_least_5_days(self):
+        unique_days = self.plan["dia"].nunique()
+        assert unique_days >= 5, f"Plan only covers {unique_days} distinct days"
+
+    def test_has_exercises(self):
+        assert self.plan["ejercicio"].notna().all(), "Some ejercicio values are NaN"
+        assert len(self.plan) >= 10, "Plan has fewer than 10 rows"
+
+
+class TestExerciseNormalization:
+    """Tests for the normalize_exercise_name helper function."""
+
+    def test_import(self):
+        """Can import normalize from app module via direct function test."""
+        import sys
+        app_dir = os.path.dirname(os.path.dirname(__file__))
+        sys.path.insert(0, app_dir)
+        from app import normalize_exercise_name
+        assert callable(normalize_exercise_name)
+
+    def test_mojibake_fix(self):
+        import sys
+        app_dir = os.path.dirname(os.path.dirname(__file__))
+        sys.path.insert(0, app_dir)
+        from app import normalize_exercise_name
+        assert normalize_exercise_name("Farmer\u00e2\u20ac\u2122s Walk") == "Farmer's Walk"
+
+    def test_unicode_apostrophe(self):
+        import sys
+        app_dir = os.path.dirname(os.path.dirname(__file__))
+        sys.path.insert(0, app_dir)
+        from app import normalize_exercise_name
+        assert normalize_exercise_name("Farmer\u2019s Walk") == "Farmer's Walk"
+
+    def test_strip_whitespace(self):
+        import sys
+        app_dir = os.path.dirname(os.path.dirname(__file__))
+        sys.path.insert(0, app_dir)
+        from app import normalize_exercise_name
+        assert normalize_exercise_name("  Squat  ") == "Squat"
+
+    def test_nan_returns_empty(self):
+        import sys
+        app_dir = os.path.dirname(os.path.dirname(__file__))
+        sys.path.insert(0, app_dir)
+        from app import normalize_exercise_name
+        assert normalize_exercise_name(float("nan")) == ""
+
+    def test_normal_name_unchanged(self):
+        import sys
+        app_dir = os.path.dirname(os.path.dirname(__file__))
+        sys.path.insert(0, app_dir)
+        from app import normalize_exercise_name
+        assert normalize_exercise_name("Squat (Barbell)") == "Squat (Barbell)"
+
+
+class TestParseRpeTargetMax:
+    """Tests for the parse_rpe_target_max helper function."""
+
+    def test_range_returns_max(self):
+        import sys
+        app_dir = os.path.dirname(os.path.dirname(__file__))
+        sys.path.insert(0, app_dir)
+        from app import parse_rpe_target_max
+        assert parse_rpe_target_max("7.5-8") == 8.0
+
+    def test_single_value(self):
+        import sys
+        app_dir = os.path.dirname(os.path.dirname(__file__))
+        sys.path.insert(0, app_dir)
+        from app import parse_rpe_target_max
+        assert parse_rpe_target_max("8") == 8.0
+
+    def test_nan_returns_none(self):
+        import sys
+        app_dir = os.path.dirname(os.path.dirname(__file__))
+        sys.path.insert(0, app_dir)
+        from app import parse_rpe_target_max
+        assert parse_rpe_target_max(float("nan")) is None
+
+    def test_empty_string_returns_none(self):
+        import sys
+        app_dir = os.path.dirname(os.path.dirname(__file__))
+        sys.path.insert(0, app_dir)
+        from app import parse_rpe_target_max
+        assert parse_rpe_target_max("") is None
