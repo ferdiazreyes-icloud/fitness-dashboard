@@ -557,24 +557,41 @@ elif page == "🎯 Adherencia":
             st.markdown("---")
             st.subheader("📋 Plan semanal (referencia)")
 
-            # Show plan grouped by day
-            day_names = {
-                "lunes": "🟢 Lunes", "martes": "🟢 Martes", "miércoles": "🟢 Miércoles",
-                "jueves": "🟢 Jueves", "viernes": "🟢 Viernes", "sábado": "🟢 Sábado",
+            # Day display names (support with and without accents)
+            day_display = {
+                "lunes": "🟢 Lunes", "martes": "🟢 Martes",
+                "miércoles": "🟢 Miércoles", "miercoles": "🟢 Miércoles",
+                "jueves": "🟢 Jueves",
+                "viernes": "🟢 Viernes",
+                "sábado": "🟢 Sábado", "sabado": "🟢 Sábado",
                 "domingo": "🟢 Domingo",
             }
+            day_order = ["lunes", "martes", "miercoles", "miércoles",
+                         "jueves", "viernes", "sabado", "sábado", "domingo"]
 
-            plan_days = plan["dia"].unique() if "dia" in plan.columns else []
-            for day in sorted(plan_days, key=lambda d: list(day_names.keys()).index(d.lower()) if d.lower() in day_names else 99):
-                day_label = day_names.get(day.lower(), day)
-                day_data = plan[plan["dia"] == day]
+            # Group by week
+            plan_wk = plan.copy()
+            plan_wk["week_num"] = plan_wk["fecha"].dt.isocalendar().week.astype(int)
+            plan_wk["week_start"] = plan_wk["fecha"] - pd.to_timedelta(
+                plan_wk["fecha"].dt.weekday, unit="D")
 
-                with st.expander(f"{day_label} — {day_data['sesion'].iloc[0] if 'sesion' in day_data.columns else ''}", expanded=False):
-                    display = day_data[["ejercicio", "serie", "peso_lb", "reps",
-                                        "rpe_target", "descanso_seg"]].copy()
-                    display.columns = ["Ejercicio", "Series", "Peso (lb)", "Reps",
-                                       "RPE Target", "Descanso (s)"]
-                    st.dataframe(display, use_container_width=True, hide_index=True)
+            for wk_num in sorted(plan_wk["week_num"].unique()):
+                wk_data = plan_wk[plan_wk["week_num"] == wk_num]
+                wk_start = wk_data["week_start"].iloc[0].strftime("%d %b")
+                wk_end = (wk_data["week_start"].iloc[0] + pd.Timedelta(days=6)).strftime("%d %b")
+                st.markdown(f"#### 📅 Semana {wk_start} – {wk_end}")
+
+                wk_days = wk_data["dia"].unique()
+                for day in sorted(wk_days, key=lambda d: day_order.index(d.lower()) if d.lower() in day_order else 99):
+                    day_label = day_display.get(day.lower(), day)
+                    day_data = wk_data[wk_data["dia"] == day]
+
+                    with st.expander(f"{day_label} — {day_data['sesion'].iloc[0] if 'sesion' in day_data.columns else ''}", expanded=False):
+                        display = day_data[["ejercicio", "serie", "peso_lb", "reps",
+                                            "rpe_target", "descanso_seg"]].copy()
+                        display.columns = ["Ejercicio", "Series", "Peso (lb)", "Reps",
+                                           "RPE Target", "Descanso (s)"]
+                        st.dataframe(display, use_container_width=True, hide_index=True)
 
         else:
             # Has overlap — show full comparison
@@ -647,18 +664,18 @@ elif page == "🎯 Adherencia":
             # Weekly traffic light
             st.subheader("Semáforo semanal")
             days_es = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
+            day_to_weekday = {
+                "lunes": 0, "martes": 1, "miércoles": 2, "miercoles": 2,
+                "jueves": 3, "viernes": 4, "sábado": 5, "sabado": 5, "domingo": 6,
+            }
             cols = st.columns(7)
 
             for i, day_name in enumerate(days_es):
                 with cols[i]:
+                    target_wd = day_to_weekday.get(day_name)
                     day_comp = comparison[
                         comparison["date_only"].apply(
-                            lambda d: d.strftime("%A").lower() == {
-                                "lunes": "monday", "martes": "tuesday",
-                                "miércoles": "wednesday", "jueves": "thursday",
-                                "viernes": "friday", "sábado": "saturday",
-                                "domingo": "sunday",
-                            }.get(day_name, "")
+                            lambda d, wd=target_wd: d.weekday() == wd
                         )
                     ]
                     if len(day_comp) == 0:

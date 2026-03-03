@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Parse Strong app export (.xlsx) into a clean CSV for the health dashboard.
+Parse Strong app export (.xlsx or .csv) into a clean CSV for the health dashboard.
 Normalizes column names, filters out rest timers, marks warmup sets.
 """
 
@@ -9,7 +9,11 @@ import sys
 import os
 
 def parse_strong(input_path, output_path):
-    df = pd.read_excel(input_path)
+    ext = os.path.splitext(input_path)[1].lower()
+    if ext == ".csv":
+        df = pd.read_csv(input_path)
+    else:
+        df = pd.read_excel(input_path)
 
     # Normalize column names (Strong exports in Spanish)
     col_map = {
@@ -65,8 +69,10 @@ def parse_strong(input_path, output_path):
     df["reps"] = df["reps"].fillna(0).astype(int)
     df["seconds"] = df["seconds"].fillna(0).astype(int)
 
-    # RPE from Notas field (Strong stores it there)
-    if "rpe_actual" in df.columns:
+    # RPE: check rpe_column first (from "RPE" header), then fall back to rpe_actual (from "Notas")
+    if "rpe_column" in df.columns and df["rpe_column"].notna().any():
+        df["rpe_actual"] = pd.to_numeric(df["rpe_column"], errors="coerce")
+    elif "rpe_actual" in df.columns:
         df["rpe_actual"] = pd.to_numeric(df["rpe_actual"], errors="coerce")
     else:
         df["rpe_actual"] = pd.Series([None] * len(df), index=df.index)
@@ -93,8 +99,8 @@ def parse_strong(input_path, output_path):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python parse_strong.py <input.xlsx> [output.csv]")
-        print("  input.xlsx  - Strong app export file")
+        print("Usage: python parse_strong.py <input.xlsx|input.csv> [output.csv]")
+        print("  input       - Strong app export file (.xlsx or .csv)")
         print("  output.csv  - Output path (default: data/strong_log.csv)")
         sys.exit(1)
     script_dir = os.path.dirname(os.path.abspath(__file__))
