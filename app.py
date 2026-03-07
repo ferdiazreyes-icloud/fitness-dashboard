@@ -787,15 +787,23 @@ elif page == "📋 Mi Plan":
                                             f"{n_rounds} rondas"
                                         )
                                     if len(descanso) > 0:
-                                        d_val = descanso.iloc[0]
-                                        if d_val >= 60:
-                                            detail_parts.append(
-                                                f"{d_val/60:.0f} min descanso"
-                                            )
-                                        else:
-                                            detail_parts.append(
-                                                f"{d_val:.0f}s descanso"
-                                            )
+                                        raw_d = descanso.iloc[0]
+                                        d_val = pd.to_numeric(raw_d, errors="coerce")
+                                        if pd.isna(d_val) and isinstance(raw_d, str) and "-" in raw_d:
+                                            parts = raw_d.split("-")
+                                            try:
+                                                d_val = max(float(p) for p in parts)
+                                            except ValueError:
+                                                d_val = None
+                                        if d_val is not None and not pd.isna(d_val):
+                                            if d_val >= 60:
+                                                detail_parts.append(
+                                                    f"{d_val/60:.0f} min descanso"
+                                                )
+                                            else:
+                                                detail_parts.append(
+                                                    f"{d_val:.0f}s descanso"
+                                                )
                                     detail_str = (
                                         " \u00b7 ".join(detail_parts)
                                         if detail_parts
