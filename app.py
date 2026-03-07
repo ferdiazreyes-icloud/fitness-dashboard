@@ -99,6 +99,87 @@ def format_exercise_summary(group_df):
     return " ".join(parts)
 
 
+def format_warmup_chip(ex_group):
+    """Format a warmup exercise group as a compact chip string."""
+    name = ex_group["ejercicio"].iloc[0]
+    n_sets = len(ex_group)
+    reps = ex_group["reps"].dropna()
+    dur = ex_group["duracion_seg"].dropna()
+    notas = ex_group["notas"].dropna()
+    nota_str = ""
+    for n in notas:
+        s = str(n).strip().lower()
+        if "por lado" in s:
+            nota_str = "/lado"
+            break
+
+    if len(dur) > 0:
+        d = dur.iloc[0]
+        mins = d / 60
+        chip = f"{name} {mins:.0f} min" if mins >= 1 else f"{name} {d:.0f}s"
+    elif len(reps) > 0:
+        r = int(reps.iloc[0])
+        if n_sets > 1:
+            chip = f"{name} \u00d7{r}{nota_str} \u00d7{n_sets}"
+        else:
+            chip = f"{name} \u00d7{r}{nota_str}"
+    else:
+        chip = name
+    return chip
+
+
+def format_exercise_compact(ex_group):
+    """Format exercise as compact row: (name, sets_reps_rpe, weight)."""
+    name = ex_group["ejercicio"].iloc[0]
+    n_sets = len(ex_group)
+    reps = ex_group["reps"].dropna()
+    dur = ex_group["duracion_seg"].dropna()
+    weight = ex_group["peso_lb"].dropna()
+    weight = weight[weight > 0]
+    rpe = ex_group["rpe_target"].dropna().unique()
+
+    if len(reps) > 0:
+        r_vals = reps.unique()
+        r_str = str(int(r_vals[0])) if len(r_vals) == 1 else f"{int(min(r_vals))}-{int(max(r_vals))}"
+        sets_str = f"\u00d7{r_str}"
+    elif len(dur) > 0:
+        d = dur.iloc[0]
+        sets_str = f"\u00d7 {d:.0f} seg"
+    else:
+        sets_str = ""
+
+    rpe_str = f"@{rpe[0]}" if len(rpe) > 0 else ""
+    mid = f"{sets_str} {rpe_str}".strip()
+
+    if len(weight) > 0:
+        w_vals = weight.unique()
+        if len(w_vals) == 1:
+            w_str = f"~{w_vals[0]:.0f} lb"
+        else:
+            w_str = f"~{min(w_vals):.0f}-{max(w_vals):.0f} lb"
+    else:
+        w_str = ""
+
+    return name, mid, w_str
+
+
+def get_key_exercises(day_data):
+    """Get abbreviated key exercise names for day subtitle."""
+    non_warmup = day_data[~day_data["sub_section"].str.lower().str.contains("warmup", na=False)]
+    if non_warmup.empty:
+        non_warmup = day_data
+    names = []
+    for _orden, grp in non_warmup.groupby("orden_ejercicio", sort=True):
+        full = grp["ejercicio"].iloc[0]
+        # Abbreviate long names
+        short = full.split("(")[0].strip()
+        if short not in names:
+            names.append(short)
+        if len(names) >= 4:
+            break
+    return " \u00b7 ".join(names)
+
+
 def classify_adherence(row):
     """Classify exercise adherence: Completado / Parcial / No hecho."""
     if pd.isna(row.get("sets_real")):
@@ -628,19 +709,6 @@ elif page == "📋 Mi Plan":
             lambda s: pd.Series(split_session(s))
         )
 
-        # KPIs
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            st.metric("Período",
-                      f"{plan_view['fecha'].min().strftime('%d %b')} – "
-                      f"{plan_view['fecha'].max().strftime('%d %b %Y')}")
-        with col2:
-            st.metric("Sesiones", plan_view["date_only"].nunique())
-        with col3:
-            st.metric("Ejercicios distintos", plan_view["ejercicio"].nunique())
-
-        st.markdown("---")
-
         # Build week tabs
         weeks = sorted(plan_view["week_num"].unique())
         week_labels = []
@@ -649,11 +717,20 @@ elif page == "📋 Mi Plan":
             wk_data = plan_view[plan_view["week_num"] == wk_num]
             wk_start = wk_data["week_start"].iloc[0]
             wk_end = wk_start + pd.Timedelta(days=6)
-            label = f"Semana {len(week_labels)+1}: {wk_start.strftime('%d %b')} – {wk_end.strftime('%d %b')}"
+            label = (f"Semana {len(week_labels)+1}: "
+                     f"{wk_start.strftime('%d %b')} \u2013 {wk_end.strftime('%d %b')}")
             week_labels.append(label)
             week_data_map[label] = wk_data
 
         tabs = st.tabs(week_labels)
+
+        DAY_ABBREV = {
+            "lunes": "LUN", "martes": "MAR",
+            "miércoles": "MIÉ", "miercoles": "MIÉ",
+            "jueves": "JUE", "viernes": "VIE",
+            "sábado": "SÁB", "sabado": "SÁB",
+            "domingo": "DOM",
+        }
 
         for tab, label in zip(tabs, week_labels):
             with tab:
@@ -666,13 +743,15 @@ elif page == "📋 Mi Plan":
 
                 for day in sorted_days:
                     day_data = wk_data[wk_data["dia"] == day]
-                    day_label = DAY_DISPLAY.get(day.lower(), day)
+                    day_abbrev = DAY_ABBREV.get(day.lower(), day[:3].upper())
+                    day_num = day_data["fecha"].dt.day.iloc[0]
                     main_sessions = day_data["main_session"].unique()
                     main_session_name = " / ".join(main_sessions)
-                    n_exercises = day_data["ejercicio"].nunique()
+                    key_ex = get_key_exercises(day_data)
 
                     with st.expander(
-                        f"**{day_label}** — {main_session_name} ({n_exercises} ejercicios)",
+                        f"**{day_abbrev} {day_num}** \u2002\u2502\u2002 "
+                        f"**{main_session_name}** \u2002 {key_ex}",
                         expanded=False,
                     ):
                         # Preserve sub_section order from CSV
@@ -683,23 +762,81 @@ elif page == "📋 Mi Plan":
 
                         for sub in seen_subs:
                             sub_data = day_data[day_data["sub_section"] == sub]
-                            if sub:
-                                st.markdown(f"##### {sub}")
+                            is_warmup = "warmup" in sub.lower() if sub else False
 
-                            exercise_groups = sub_data.groupby(
-                                ["orden_ejercicio", "ejercicio"], sort=True
-                            )
-                            for (_orden, _ejercicio), ex_group in exercise_groups:
-                                summary = format_exercise_summary(ex_group)
-                                st.markdown(f"- {summary}")
+                            if is_warmup:
+                                # Compact warmup: chips on one line
+                                chips = []
+                                for _o, grp in sub_data.groupby(
+                                    "orden_ejercicio", sort=True
+                                ):
+                                    chips.append(format_warmup_chip(grp))
+                                st.caption(
+                                    "WARM\u2011UP: " + " \u00b7 ".join(chips)
+                                )
+                            else:
+                                # Section header
+                                if sub:
+                                    # Build section detail from notas
+                                    notas_all = sub_data["notas"].dropna().unique()
+                                    n_rounds = sub_data.groupby("ejercicio").size().max()
+                                    descanso = sub_data["descanso_seg"].dropna()
+                                    detail_parts = []
+                                    if n_rounds > 1:
+                                        detail_parts.append(
+                                            f"{n_rounds} rondas"
+                                        )
+                                    if len(descanso) > 0:
+                                        d_val = descanso.iloc[0]
+                                        if d_val >= 60:
+                                            detail_parts.append(
+                                                f"{d_val/60:.0f} min descanso"
+                                            )
+                                        else:
+                                            detail_parts.append(
+                                                f"{d_val:.0f}s descanso"
+                                            )
+                                    detail_str = (
+                                        " \u00b7 ".join(detail_parts)
+                                        if detail_parts
+                                        else ""
+                                    )
+                                    header = f"**{sub.upper()}**"
+                                    if detail_str:
+                                        header += f" \u2014 {detail_str}"
+                                    st.markdown(header)
 
-                                # Show notas if meaningful
-                                notas = ex_group["notas"].dropna().unique()
-                                notas = [n for n in notas
-                                         if str(n).strip().lower() not in ("warmup", "")]
-                                if notas:
-                                    for nota in notas:
-                                        st.caption(f"  💡 {nota}")
+                                # Exercise rows
+                                for _o, grp in sub_data.groupby(
+                                    "orden_ejercicio", sort=True
+                                ):
+                                    name, mid, w_str = (
+                                        format_exercise_compact(grp)
+                                    )
+                                    c1, c2, c3 = st.columns([3, 2, 1])
+                                    with c1:
+                                        st.markdown(f"**{name}**")
+                                    with c2:
+                                        st.markdown(
+                                            f"`{mid}`" if mid else ""
+                                        )
+                                    with c3:
+                                        st.caption(w_str)
+
+                                    # Important notas (not warmup, not empty)
+                                    notas = grp["notas"].dropna().unique()
+                                    notas = [
+                                        n for n in notas
+                                        if str(n).strip().lower()
+                                        not in ("warmup", "")
+                                        and "superserie ronda" not in str(n).lower()
+                                        and "bloque" not in str(n).lower()
+                                    ]
+                                    if notas:
+                                        st.caption(
+                                            f"\u00a0\u00a0\u00a0\u00a0"
+                                            f"\U0001f4a1 {notas[0]}"
+                                        )
 
 
 # ============================================================
