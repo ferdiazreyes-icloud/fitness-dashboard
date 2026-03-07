@@ -263,7 +263,7 @@ def load_data():
     # Training plan (weekly prescription)
     plan_path = os.path.join(DATA_DIR, "training_plan.csv")
     if os.path.exists(plan_path):
-        plan = pd.read_csv(plan_path, on_bad_lines="skip")
+        plan = pd.read_csv(plan_path)
         plan["fecha"] = pd.to_datetime(plan["fecha"])
         plan["date_only"] = plan["fecha"].dt.date
         plan["exercise_norm"] = plan["ejercicio"].apply(normalize_exercise_name)
