@@ -2,7 +2,7 @@
 
 Personal health and fitness dashboard. Consolidates data from Apple Health, Strong App, and Claude Coach training plans into interactive Streamlit visualizations.
 
-**Version:** V1.1 — Functional dashboard with 7 pages
+**Version:** V1.2 — Functional dashboard with 8 pages
 **Status:** Production-ready for Streamlit Cloud
 **Data range:** 2018 – present (~8 years of history)
 
@@ -14,7 +14,8 @@ Personal health and fitness dashboard. Consolidates data from Apple Health, Stro
 - [x] Page: Resumen Semanal (KPIs, trends, activity distribution)
 - [x] Page: Running Analytics (pace, power, distance, recent runs)
 - [x] Page: Fuerza Analytics (weight progression, volume, RPE, HR, personal records)
-- [x] Page: Adherencia (plan vs reality comparison with traffic light, or plan-only view)
+- [x] Page: Mi Plan (compact weekly training plan viewer with block/circuit support)
+- [x] Page: Adherencia (plan vs reality comparison — uses ALL plan days for semáforo)
 - [x] Page: Tendencias de Salud (VO2Max, RHR, HRV, sleep, SpO2)
 - [x] Page: Composición Corporal (weight, BMI, body fat, lean mass)
 - [x] Page: Métricas Acumuladas (lifetime/YTD totals, monthly breakdown)
@@ -62,7 +63,7 @@ Streamlit Cloud re-deploys automatically in ~2 minutes.
 
 ```
 health-dashboard/
-├── app.py                  # Streamlit dashboard (7 pages)
+├── app.py                  # Streamlit dashboard (8 pages)
 ├── requirements.txt        # Production dependencies
 ├── data/                   # CSVs for Streamlit (committed to repo)
 ├── scripts/                # ETL scripts (run locally only)
