@@ -227,3 +227,106 @@ class TestParseRpeTargetMax:
         sys.path.insert(0, app_dir)
         from app import parse_rpe_target_max
         assert parse_rpe_target_max("") is None
+
+
+class TestSplitSession:
+    """Tests for the split_session helper function."""
+
+    def _import(self):
+        import sys
+        app_dir = os.path.dirname(os.path.dirname(__file__))
+        sys.path.insert(0, app_dir)
+        from app import split_session
+        return split_session
+
+    def test_with_separator(self):
+        fn = self._import()
+        assert fn("Fuerza A - Warmup") == ("Fuerza A", "Warmup")
+
+    def test_no_separator(self):
+        fn = self._import()
+        assert fn("Z2 Run") == ("Z2 Run", "")
+
+    def test_nan(self):
+        fn = self._import()
+        assert fn(float("nan")) == ("nan", "")
+
+
+class TestFormatExerciseSummary:
+    """Tests for the format_exercise_summary helper function."""
+
+    def _import(self):
+        import sys
+        app_dir = os.path.dirname(os.path.dirname(__file__))
+        sys.path.insert(0, app_dir)
+        from app import format_exercise_summary
+        return format_exercise_summary
+
+    def test_uniform_sets(self):
+        fn = self._import()
+        df = pd.DataFrame({
+            "ejercicio": ["Squat (Barbell)"] * 4,
+            "serie": [1, 2, 3, 4],
+            "peso_lb": [175.0] * 4,
+            "reps": [4.0] * 4,
+            "rpe_target": ["7.5-8"] * 4,
+            "duracion_seg": [None] * 4,
+        })
+        result = fn(df)
+        assert "Squat (Barbell)" in result
+        assert "4\u00d74" in result
+        assert "175" in result
+
+    def test_bodyweight(self):
+        fn = self._import()
+        df = pd.DataFrame({
+            "ejercicio": ["Pull Up"] * 4,
+            "serie": [1, 2, 3, 4],
+            "peso_lb": [None] * 4,
+            "reps": [3.0] * 4,
+            "rpe_target": ["8"] * 4,
+            "duracion_seg": [None] * 4,
+        })
+        result = fn(df)
+        assert "Pull Up" in result
+        assert "4\u00d73" in result
+
+    def test_duration_based(self):
+        fn = self._import()
+        df = pd.DataFrame({
+            "ejercicio": ["Dead Hang"] * 2,
+            "serie": [1, 2],
+            "peso_lb": [None] * 2,
+            "reps": [None] * 2,
+            "rpe_target": [None] * 2,
+            "duracion_seg": [30.0] * 2,
+        })
+        result = fn(df)
+        assert "Dead Hang" in result
+        assert "30" in result
+
+
+class TestClassifyAdherence:
+    """Tests for the classify_adherence helper function."""
+
+    def _import(self):
+        import sys
+        app_dir = os.path.dirname(os.path.dirname(__file__))
+        sys.path.insert(0, app_dir)
+        from app import classify_adherence
+        return classify_adherence
+
+    def test_no_data(self):
+        fn = self._import()
+        row = {"sets_real": float("nan"), "sets_plan": 4}
+        assert "No hecho" in fn(row)
+
+    def test_completed(self):
+        fn = self._import()
+        row = {"sets_real": 4, "sets_plan": 4}
+        assert "Completado" in fn(row)
+
+    def test_partial(self):
+        fn = self._import()
+        row = {"sets_real": 2, "sets_plan": 4}
+        assert "Parcial" in fn(row)

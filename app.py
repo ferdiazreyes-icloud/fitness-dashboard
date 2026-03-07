@@ -43,6 +43,72 @@ def parse_rpe_target_max(val):
         return None
 
 
+def split_session(sesion_str):
+    """Split session string 'Fuerza A - Warmup' into ('Fuerza A', 'Warmup')."""
+    if pd.isna(sesion_str) or " - " not in str(sesion_str):
+        return str(sesion_str), ""
+    parts = str(sesion_str).split(" - ", 1)
+    return parts[0].strip(), parts[1].strip()
+
+
+def format_exercise_summary(group_df):
+    """Aggregate sets of same exercise into readable summary."""
+    exercise = group_df["ejercicio"].iloc[0]
+    n_sets = len(group_df)
+
+    # Reps
+    reps_vals = group_df["reps"].dropna().unique()
+    if len(reps_vals) == 1:
+        reps_str = str(int(reps_vals[0]))
+    elif len(reps_vals) > 1:
+        reps_str = f"{int(min(reps_vals))}-{int(max(reps_vals))}"
+    else:
+        reps_str = None
+
+    # Weight
+    weight_vals = group_df["peso_lb"].dropna()
+    weight_vals = weight_vals[weight_vals > 0]
+    if len(weight_vals) == 1:
+        weight_str = f"@ {weight_vals.iloc[0]:.0f}lb"
+    elif len(weight_vals) > 1 and weight_vals.nunique() > 1:
+        weight_str = f"@ {weight_vals.min():.0f}-{weight_vals.max():.0f}lb"
+    elif len(weight_vals) > 1:
+        weight_str = f"@ {weight_vals.iloc[0]:.0f}lb"
+    else:
+        weight_str = None
+
+    # RPE
+    rpe_vals = group_df["rpe_target"].dropna().unique()
+    rpe_str = f"RPE {rpe_vals[0]}" if len(rpe_vals) > 0 else None
+
+    # Duration
+    dur_vals = group_df["duracion_seg"].dropna()
+    if len(dur_vals) > 0 and reps_str is None:
+        dur_val = dur_vals.iloc[0]
+        sets_part = f"{n_sets}\u00d7{dur_val}s"
+    elif reps_str:
+        sets_part = f"{n_sets}\u00d7{reps_str}"
+    else:
+        sets_part = f"{n_sets} sets"
+
+    parts = [f"**{exercise}**", f"`{sets_part}`"]
+    if weight_str:
+        parts.append(weight_str)
+    if rpe_str:
+        parts.append(rpe_str)
+    return " ".join(parts)
+
+
+def classify_adherence(row):
+    """Classify exercise adherence: Completado / Parcial / No hecho."""
+    if pd.isna(row.get("sets_real")):
+        return "❌ No hecho"
+    ratio = row["sets_real"] / row["sets_plan"] if row["sets_plan"] > 0 else 0
+    if ratio >= 0.8:
+        return "✅ Completado"
+    return "⚠️ Parcial"
+
+
 # --- Data Loading ---
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 
@@ -105,6 +171,7 @@ page = st.sidebar.radio("Página", [
     "📊 Resumen Semanal",
     "🏃 Running Analytics",
     "🏋️ Fuerza Analytics",
+    "📋 Mi Plan",
     "🎯 Adherencia",
     "❤️ Tendencias de Salud",
     "⚖️ Composición Corporal",
@@ -146,6 +213,21 @@ COLORS = {
     "Cooldown": "#B0B0B0",
     "Boxing": "#E17055",
     "Other": "#CCCCCC",
+}
+
+# --- Day name constants (support accented and unaccented) ---
+DAY_DISPLAY = {
+    "lunes": "Lunes", "martes": "Martes",
+    "miércoles": "Miércoles", "miercoles": "Miércoles",
+    "jueves": "Jueves", "viernes": "Viernes",
+    "sábado": "Sábado", "sabado": "Sábado",
+    "domingo": "Domingo",
+}
+DAY_ORDER = ["lunes", "martes", "miercoles", "miércoles",
+             "jueves", "viernes", "sabado", "sábado", "domingo"]
+DAY_TO_WEEKDAY = {
+    "lunes": 0, "martes": 1, "miércoles": 2, "miercoles": 2,
+    "jueves": 3, "viernes": 4, "sábado": 5, "sabado": 5, "domingo": 6,
 }
 
 # ============================================================
@@ -529,6 +611,98 @@ elif page == "🏋️ Fuerza Analytics":
 
 
 # ============================================================
+# PAGE: MI PLAN
+# ============================================================
+elif page == "📋 Mi Plan":
+    st.title("📋 Mi Plan de Entrenamiento")
+
+    if plan.empty:
+        st.warning("No hay plan de entrenamiento. Asegúrate de que `data/training_plan.csv` exista.")
+    else:
+        plan_view = plan.copy()
+        plan_view["week_num"] = plan_view["fecha"].dt.isocalendar().week.astype(int)
+        plan_view["week_start"] = plan_view["fecha"] - pd.to_timedelta(
+            plan_view["fecha"].dt.weekday, unit="D"
+        )
+        plan_view[["main_session", "sub_section"]] = plan_view["sesion"].apply(
+            lambda s: pd.Series(split_session(s))
+        )
+
+        # KPIs
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric("Período",
+                      f"{plan_view['fecha'].min().strftime('%d %b')} – "
+                      f"{plan_view['fecha'].max().strftime('%d %b %Y')}")
+        with col2:
+            st.metric("Sesiones", plan_view["date_only"].nunique())
+        with col3:
+            st.metric("Ejercicios distintos", plan_view["ejercicio"].nunique())
+
+        st.markdown("---")
+
+        # Build week tabs
+        weeks = sorted(plan_view["week_num"].unique())
+        week_labels = []
+        week_data_map = {}
+        for wk_num in weeks:
+            wk_data = plan_view[plan_view["week_num"] == wk_num]
+            wk_start = wk_data["week_start"].iloc[0]
+            wk_end = wk_start + pd.Timedelta(days=6)
+            label = f"Semana {len(week_labels)+1}: {wk_start.strftime('%d %b')} – {wk_end.strftime('%d %b')}"
+            week_labels.append(label)
+            week_data_map[label] = wk_data
+
+        tabs = st.tabs(week_labels)
+
+        for tab, label in zip(tabs, week_labels):
+            with tab:
+                wk_data = week_data_map[label]
+                wk_days = wk_data["dia"].unique()
+                sorted_days = sorted(
+                    wk_days,
+                    key=lambda d: DAY_ORDER.index(d.lower()) if d.lower() in DAY_ORDER else 99
+                )
+
+                for day in sorted_days:
+                    day_data = wk_data[wk_data["dia"] == day]
+                    day_label = DAY_DISPLAY.get(day.lower(), day)
+                    main_sessions = day_data["main_session"].unique()
+                    main_session_name = " / ".join(main_sessions)
+                    n_exercises = day_data["ejercicio"].nunique()
+
+                    with st.expander(
+                        f"**{day_label}** — {main_session_name} ({n_exercises} ejercicios)",
+                        expanded=False,
+                    ):
+                        # Preserve sub_section order from CSV
+                        seen_subs = []
+                        for ss in day_data["sub_section"]:
+                            if ss not in seen_subs:
+                                seen_subs.append(ss)
+
+                        for sub in seen_subs:
+                            sub_data = day_data[day_data["sub_section"] == sub]
+                            if sub:
+                                st.markdown(f"##### {sub}")
+
+                            exercise_groups = sub_data.groupby(
+                                ["orden_ejercicio", "ejercicio"], sort=True
+                            )
+                            for (_orden, _ejercicio), ex_group in exercise_groups:
+                                summary = format_exercise_summary(ex_group)
+                                st.markdown(f"- {summary}")
+
+                                # Show notas if meaningful
+                                notas = ex_group["notas"].dropna().unique()
+                                notas = [n for n in notas
+                                         if str(n).strip().lower() not in ("warmup", "")]
+                                if notas:
+                                    for nota in notas:
+                                        st.caption(f"  💡 {nota}")
+
+
+# ============================================================
 # PAGE: ADHERENCIA
 # ============================================================
 elif page == "🎯 Adherencia":
@@ -539,167 +713,117 @@ elif page == "🎯 Adherencia":
     elif strong.empty:
         st.warning("No hay datos de Strong App para comparar con el plan.")
     else:
-        # Check date overlap
+        # Use ALL plan dates for comparison (not just overlap)
         plan_dates = set(plan["date_only"].unique())
         strong_dates = set(strong["date_only"].unique())
         overlap_dates = plan_dates & strong_dates
+        missing_dates = plan_dates - strong_dates
 
-        if len(overlap_dates) == 0:
-            # No overlap — show plan only
-            st.info(
-                "📅 **Aún no hay overlap de fechas entre el plan y los datos de Strong.**\n\n"
-                f"- Plan: {min(plan_dates)} a {max(plan_dates)}\n"
-                f"- Strong: {min(strong_dates)} a {max(strong_dates)}\n\n"
-                "Cuando actualices la exportación de Strong, se mostrarán las comparaciones "
-                "plan vs realidad automáticamente."
-            )
+        st.info(
+            f"📅 Plan: {min(plan_dates)} a {max(plan_dates)} "
+            f"(**{len(plan_dates)}** días)\n\n"
+            f"📊 Strong tiene datos para **{len(overlap_dates)}** de "
+            f"{len(plan_dates)} días del plan."
+        )
 
-            st.markdown("---")
-            st.subheader("📋 Plan semanal (referencia)")
+        # Use ALL plan data
+        plan_all = plan.copy()
 
-            # Day display names (support with and without accents)
-            day_display = {
-                "lunes": "🟢 Lunes", "martes": "🟢 Martes",
-                "miércoles": "🟢 Miércoles", "miercoles": "🟢 Miércoles",
-                "jueves": "🟢 Jueves",
-                "viernes": "🟢 Viernes",
-                "sábado": "🟢 Sábado", "sabado": "🟢 Sábado",
-                "domingo": "🟢 Domingo",
-            }
-            day_order = ["lunes", "martes", "miercoles", "miércoles",
-                         "jueves", "viernes", "sabado", "sábado", "domingo"]
+        # Filter strong to plan period
+        strong_in_period = strong[
+            (strong["date_only"] >= min(plan_dates))
+            & (strong["date_only"] <= max(plan_dates))
+        ].copy()
 
-            # Group by week
-            plan_wk = plan.copy()
-            plan_wk["week_num"] = plan_wk["fecha"].dt.isocalendar().week.astype(int)
-            plan_wk["week_start"] = plan_wk["fecha"] - pd.to_timedelta(
-                plan_wk["fecha"].dt.weekday, unit="D")
+        # Merge plan vs strong
+        plan_exercises = plan_all.groupby(["date_only", "exercise_norm"]).agg(
+            sets_plan=("serie", "count"),
+            weight_plan=("peso_lb", "max"),
+            reps_plan=("reps", "max"),
+            rpe_plan=("rpe_target_max", "max"),
+        ).reset_index()
 
-            for wk_num in sorted(plan_wk["week_num"].unique()):
-                wk_data = plan_wk[plan_wk["week_num"] == wk_num]
-                wk_start = wk_data["week_start"].iloc[0].strftime("%d %b")
-                wk_end = (wk_data["week_start"].iloc[0] + pd.Timedelta(days=6)).strftime("%d %b")
-                st.markdown(f"#### 📅 Semana {wk_start} – {wk_end}")
-
-                wk_days = wk_data["dia"].unique()
-                for day in sorted(wk_days, key=lambda d: day_order.index(d.lower()) if d.lower() in day_order else 99):
-                    day_label = day_display.get(day.lower(), day)
-                    day_data = wk_data[wk_data["dia"] == day]
-
-                    with st.expander(f"{day_label} — {day_data['sesion'].iloc[0] if 'sesion' in day_data.columns else ''}", expanded=False):
-                        display = day_data[["ejercicio", "serie", "peso_lb", "reps",
-                                            "rpe_target", "descanso_seg"]].copy()
-                        display.columns = ["Ejercicio", "Series", "Peso (lb)", "Reps",
-                                           "RPE Target", "Descanso (s)"]
-                        st.dataframe(display, use_container_width=True, hide_index=True)
-
-        else:
-            # Has overlap — show full comparison
-            overlap_min = min(overlap_dates)
-            overlap_max = max(overlap_dates)
-
-            st.success(f"Comparando datos del {overlap_min} al {overlap_max}")
-
-            # Filter to overlap period
-            plan_overlap = plan[plan["date_only"].isin(overlap_dates)].copy()
-            strong_overlap = strong[strong["date_only"].isin(overlap_dates)].copy()
-
-            # Merge plan vs strong
-            plan_exercises = (plan_overlap.groupby(["date_only", "exercise_norm"]).agg(
-                sets_plan=("serie", "count"),
-                weight_plan=("peso_lb", "max"),
-                reps_plan=("reps", "max"),
-                rpe_plan=("rpe_target_max", "max"),
-            ).reset_index())
-
-            strong_exercises = (strong_overlap[strong_overlap["set_type"] == "working"]
-                                .groupby(["date_only", "exercise_norm"]).agg(
+        strong_exercises = (
+            strong_in_period[strong_in_period["set_type"] == "working"]
+            .groupby(["date_only", "exercise_norm"])
+            .agg(
                 sets_real=("set_num", "count"),
                 weight_real=("weight_lb", "max"),
                 reps_real=("reps", "max"),
                 rpe_real=("rpe_actual", "mean"),
-            ).reset_index())
-
-            comparison = plan_exercises.merge(
-                strong_exercises,
-                on=["date_only", "exercise_norm"],
-                how="left",
             )
+            .reset_index()
+        )
 
-            # Classify status
-            def classify_adherence(row):
-                if pd.isna(row.get("sets_real")):
-                    return "❌ No hecho"
-                ratio = row["sets_real"] / row["sets_plan"] if row["sets_plan"] > 0 else 0
-                if ratio >= 0.8:
-                    return "✅ Completado"
-                return "⚠️ Parcial"
+        comparison = plan_exercises.merge(
+            strong_exercises,
+            on=["date_only", "exercise_norm"],
+            how="left",
+        )
 
-            comparison["estado"] = comparison.apply(classify_adherence, axis=1)
+        comparison["estado"] = comparison.apply(classify_adherence, axis=1)
 
-            # KPIs
-            total_exercises = len(comparison)
-            completed = len(comparison[comparison["estado"] == "✅ Completado"])
-            partial = len(comparison[comparison["estado"] == "⚠️ Parcial"])
-            missed = len(comparison[comparison["estado"] == "❌ No hecho"])
-            adherence_pct = ((completed + partial * 0.5) / total_exercises * 100
-                             if total_exercises > 0 else 0)
+        # KPIs
+        total_exercises = len(comparison)
+        completed = len(comparison[comparison["estado"] == "✅ Completado"])
+        partial = len(comparison[comparison["estado"] == "⚠️ Parcial"])
+        missed = len(comparison[comparison["estado"] == "❌ No hecho"])
+        adherence_pct = ((completed + partial * 0.5) / total_exercises * 100
+                         if total_exercises > 0 else 0)
 
-            col1, col2, col3, col4 = st.columns(4)
-            with col1:
-                st.metric("% Adherencia", f"{adherence_pct:.0f}%")
-            with col2:
-                plan_sessions = plan_overlap["date_only"].nunique()
-                real_sessions = strong_overlap["date_only"].nunique()
-                st.metric("Sesiones", f"{real_sessions}/{plan_sessions}")
-            with col3:
-                st.metric("Ejercicios", f"{completed}/{total_exercises}")
-            with col4:
-                rpe_diff = (comparison["rpe_real"].mean() - comparison["rpe_plan"].mean())
-                st.metric("RPE Δ (Real − Plan)",
-                          f"{rpe_diff:+.1f}" if pd.notna(rpe_diff) else "N/A")
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            st.metric("% Adherencia", f"{adherence_pct:.0f}%")
+        with col2:
+            plan_sessions = plan_all["date_only"].nunique()
+            real_sessions = len(overlap_dates)
+            st.metric("Sesiones", f"{real_sessions}/{plan_sessions}")
+        with col3:
+            st.metric("Ejercicios", f"{completed}/{total_exercises}")
+        with col4:
+            rpe_diff = comparison["rpe_real"].mean() - comparison["rpe_plan"].mean()
+            st.metric("RPE Δ (Real − Plan)",
+                      f"{rpe_diff:+.1f}" if pd.notna(rpe_diff) else "N/A")
 
-            st.markdown("---")
+        st.markdown("---")
 
-            # Weekly traffic light
-            st.subheader("Semáforo semanal")
-            days_es = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
-            day_to_weekday = {
-                "lunes": 0, "martes": 1, "miércoles": 2, "miercoles": 2,
-                "jueves": 3, "viernes": 4, "sábado": 5, "sabado": 5, "domingo": 6,
-            }
-            cols = st.columns(7)
+        # Weekly traffic light (using ALL plan days)
+        st.subheader("Semáforo semanal")
+        days_es = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
+        cols = st.columns(7)
 
-            for i, day_name in enumerate(days_es):
-                with cols[i]:
-                    target_wd = day_to_weekday.get(day_name)
-                    day_comp = comparison[
-                        comparison["date_only"].apply(
-                            lambda d, wd=target_wd: d.weekday() == wd
-                        )
-                    ]
-                    if len(day_comp) == 0:
-                        st.markdown(f"**{day_name[:3].title()}**\n\n⚪ Sin plan")
+        for i, day_name in enumerate(days_es):
+            with cols[i]:
+                target_wd = DAY_TO_WEEKDAY.get(day_name)
+                day_comp = comparison[
+                    comparison["date_only"].apply(
+                        lambda d, wd=target_wd: d.weekday() == wd
+                    )
+                ]
+                if len(day_comp) == 0:
+                    st.markdown(f"**{day_name[:3].title()}**\n\n⚪ Sin plan")
+                else:
+                    n_completed = len(day_comp[day_comp["estado"] == "✅ Completado"])
+                    n_partial = len(day_comp[day_comp["estado"] == "⚠️ Parcial"])
+                    done_ratio = (n_completed + n_partial * 0.5) / len(day_comp)
+                    if done_ratio >= 0.8:
+                        emoji = "🟢"
+                    elif done_ratio > 0:
+                        emoji = "🟡"
                     else:
-                        done_ratio = len(day_comp[day_comp["estado"] == "✅ Completado"]) / len(day_comp)
-                        if done_ratio >= 0.8:
-                            emoji = "🟢"
-                        elif done_ratio > 0:
-                            emoji = "🟡"
-                        else:
-                            emoji = "🔴"
-                        st.markdown(f"**{day_name[:3].title()}**\n\n{emoji} {done_ratio:.0%}")
+                        emoji = "🔴"
+                    st.markdown(f"**{day_name[:3].title()}**\n\n{emoji} {done_ratio:.0%}")
 
-            st.markdown("---")
+        st.markdown("---")
 
-            # Detail table
-            st.subheader("Detalle de ejercicios")
-            detail = comparison[["date_only", "exercise_norm", "weight_plan", "weight_real",
-                                 "reps_plan", "reps_real", "rpe_plan", "rpe_real", "estado"]].copy()
-            detail.columns = ["Fecha", "Ejercicio", "Peso Plan", "Peso Real",
-                              "Reps Plan", "Reps Real", "RPE Plan", "RPE Real", "Estado"]
-            detail = detail.sort_values(["Fecha", "Ejercicio"])
-            st.dataframe(detail, use_container_width=True, hide_index=True)
+        # Detail table
+        st.subheader("Detalle de ejercicios")
+        detail = comparison[["date_only", "exercise_norm", "weight_plan", "weight_real",
+                             "reps_plan", "reps_real", "rpe_plan", "rpe_real", "estado"]].copy()
+        detail.columns = ["Fecha", "Ejercicio", "Peso Plan", "Peso Real",
+                          "Reps Plan", "Reps Real", "RPE Plan", "RPE Real", "Estado"]
+        detail = detail.sort_values(["Fecha", "Ejercicio"])
+        st.dataframe(detail, use_container_width=True, hide_index=True)
 
 
 # ============================================================
