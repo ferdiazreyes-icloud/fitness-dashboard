@@ -4,6 +4,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
 import os
+import re
 
 # --- Page Config ---
 st.set_page_config(
@@ -803,34 +804,103 @@ elif page == "📋 Mi Plan":
                                     "WARM\u2011UP: " + " \u00b7 ".join(chips)
                                 )
                             else:
-                                # Section header as single caption line
-                                if sub:
-                                    n_rounds = sub_data.groupby("ejercicio").size().max()
-                                    descanso = sub_data["descanso_seg"].dropna()
-                                    hdr_parts = [sub.upper()]
-                                    if n_rounds > 1:
-                                        hdr_parts.append(f"{n_rounds}r")
-                                    if len(descanso) > 0:
-                                        d_val = safe_numeric(descanso.iloc[0])
-                                        if d_val is not None:
-                                            d_str = f"{d_val/60:.0f}min" if d_val >= 60 else f"{d_val:.0f}s"
-                                            hdr_parts.append(f"rest {d_str}")
-                                    st.caption(" \u00b7 ".join(hdr_parts))
+                                # Check if exercises have block labels in notas
+                                all_notas = sub_data["notas"].dropna().tolist()
+                                has_blocks = any("bloque" in str(n).lower() for n in all_notas)
+                                is_total = sub and "total" in sub.lower()
 
-                                # Build all exercises as a single markdown table
-                                rows = []
-                                for _o, grp in sub_data.groupby(
-                                    "orden_ejercicio", sort=True
-                                ):
-                                    name, mid, w_str = format_exercise_compact(grp)
-                                    mid_display = f"`{mid}`" if mid else ""
-                                    rows.append(f"**{name}** | {mid_display} | {w_str}")
-                                if rows:
-                                    table_md = "| Ejercicio | Sets | Peso |\n|:--|:--|--:|\n"
-                                    table_md += "\n".join(
-                                        f"| {r}" for r in rows
-                                    )
-                                    st.markdown(table_md, unsafe_allow_html=False)
+                                if is_total:
+                                    # TOTAL section: show distance/duration from notas
+                                    st.caption(sub.upper())
+                                    for _o, grp in sub_data.groupby("orden_ejercicio", sort=True):
+                                        name = grp["ejercicio"].iloc[0]
+                                        dist = grp["distancia_km"].dropna()
+                                        dur = grp["duracion_seg"].dropna()
+                                        nota = grp["notas"].dropna()
+                                        parts = [f"**{name}**"]
+                                        if len(dist) > 0:
+                                            parts.append(f"~{dist.iloc[0]} km")
+                                        elif len(dur) > 0:
+                                            d = safe_numeric(dur.iloc[0])
+                                            if d is not None:
+                                                parts.append(f"~{d/60:.0f} min")
+                                        if len(nota) > 0:
+                                            n_str = str(nota.iloc[0]).strip()
+                                            if "distancia" in n_str.lower() or "descanso" in n_str.lower():
+                                                parts.append(f"— {n_str}")
+                                        st.markdown(" ".join(parts))
+
+                                elif has_blocks:
+                                    # Circuit/block section: extract block info from notas
+                                    n_blocks = len(sub_data.groupby("orden_ejercicio"))
+                                    first_nota = str(all_notas[0]) if all_notas else ""
+                                    hdr_parts = [f"{n_blocks} BLOQUES"]
+                                    # Extract work duration from notas (e.g. "4min trabajo")
+                                    m_work = re.search(r"(\d+)\s*min\s*trabajo", first_nota)
+                                    if m_work:
+                                        hdr_parts.append(f"{m_work.group(1)} min trabajo")
+                                    # Extract rest info from ALL day notas (may be in Total section)
+                                    day_notas = day_data["notas"].dropna().tolist()
+                                    for dn in day_notas:
+                                        m_rest = re.search(r"descanso\s*(\d+)\s*min", str(dn))
+                                        if m_rest:
+                                            hdr_parts.append(f"{m_rest.group(1)} min descanso")
+                                            break
+                                    st.caption(" · ".join(hdr_parts))
+
+                                    # Each exercise as a compact line with block label
+                                    lines = []
+                                    for _o, grp in sub_data.groupby("orden_ejercicio", sort=True):
+                                        name = grp["ejercicio"].iloc[0]
+                                        nota = grp["notas"].dropna()
+                                        block_label = ""
+                                        if len(nota) > 0:
+                                            m = re.search(r"bloque\s*(\d+)", str(nota.iloc[0]).lower())
+                                            if m:
+                                                block_label = f"B{m.group(1)}"
+                                        reps = grp["reps"].dropna()
+                                        dur = grp["duracion_seg"].dropna()
+                                        if len(reps) > 0:
+                                            r = safe_numeric(reps.iloc[0])
+                                            val = f"{int(r)}" if r else str(reps.iloc[0])
+                                            lines.append(f"{block_label} | **{val}** {name.lower()}")
+                                        elif len(dur) > 0:
+                                            d = safe_numeric(dur.iloc[0])
+                                            val = f"{int(d)}s" if d else str(dur.iloc[0])
+                                            lines.append(f"{block_label} | **{val}** {name.lower()}")
+                                        else:
+                                            lines.append(f"{block_label} | {name}")
+                                    st.markdown("  \n".join(lines))
+
+                                else:
+                                    # Regular section (Superserie, Grip, etc.)
+                                    if sub:
+                                        n_sets = sub_data.groupby("ejercicio").size().max()
+                                        descanso = sub_data["descanso_seg"].dropna()
+                                        hdr_parts = [sub.upper()]
+                                        if n_sets > 1:
+                                            hdr_parts.append(f"{n_sets}×")
+                                        if len(descanso) > 0:
+                                            d_val = safe_numeric(descanso.iloc[0])
+                                            if d_val is not None:
+                                                d_str = f"{d_val/60:.0f}min" if d_val >= 60 else f"{d_val:.0f}s"
+                                                hdr_parts.append(f"rest {d_str}")
+                                        st.caption(" · ".join(hdr_parts))
+
+                                    # Compact table
+                                    rows = []
+                                    for _o, grp in sub_data.groupby(
+                                        "orden_ejercicio", sort=True
+                                    ):
+                                        name, mid, w_str = format_exercise_compact(grp)
+                                        mid_display = f"`{mid}`" if mid else ""
+                                        rows.append(f"**{name}** | {mid_display} | {w_str}")
+                                    if rows:
+                                        table_md = "| Ejercicio | Sets | Peso |\n|:--|:--|--:|\n"
+                                        table_md += "\n".join(
+                                            f"| {r}" for r in rows
+                                        )
+                                        st.markdown(table_md, unsafe_allow_html=False)
 
 
 # ============================================================

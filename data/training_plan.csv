@@ -68,7 +68,7 @@ fecha,dia,sesion,orden_ejercicio,ejercicio,serie,peso_lb,reps,duracion_seg,dista
 2026-02-26,jueves,Circuito Spartan - Bloque,6,Burpee,1,,10,,,,,bloque 1 - 4min trabajo con trote continuo
 2026-02-26,jueves,Circuito Spartan - Bloque,7,KB Swing,1,,15,,,,,bloque 2 - 4min trabajo con trote continuo
 2026-02-26,jueves,Circuito Spartan - Bloque,8,Jump Squat,1,,8,,,,,bloque 3 - 4min trabajo con trote continuo
-2026-02-26,jueves,Circuito Spartan - Bloque,9,Plank Hold,1,,,30,,,,,bloque 4 - 4min trabajo con trote continuo
+2026-02-26,jueves,Circuito Spartan - Bloque,9,Plank Hold,1,,,30,,,,bloque 4 - 4min trabajo con trote continuo
 2026-02-26,jueves,Circuito Spartan - Bloque,10,Burpee,2,,10,,,,,bloque 5 - 4min trabajo con trote continuo
 2026-02-26,jueves,Circuito Spartan - Bloque,11,Goblet Squat,1,,12,,,,,bloque 6 - 4min trabajo con trote continuo
 2026-02-26,jueves,Circuito Spartan - Total,12,Running - Circuito,1,,,1800-2100,5.0-6.0,,,"distancia total estimada incluyendo trote entre bloques - descanso 1min entre bloques"
@@ -171,7 +171,7 @@ fecha,dia,sesion,orden_ejercicio,ejercicio,serie,peso_lb,reps,duracion_seg,dista
 2026-03-05,jueves,Circuito Spartan - Bloque,6,Burpee,1,,12,,,,,bloque 1 - 4min trabajo con trote continuo - +2 vs W1
 2026-03-05,jueves,Circuito Spartan - Bloque,7,KB Swing,1,,17,,,,,bloque 2 - +2 vs W1
 2026-03-05,jueves,Circuito Spartan - Bloque,8,Jump Squat,1,,10,,,,,bloque 3 - +2 vs W1
-2026-03-05,jueves,Circuito Spartan - Bloque,9,Plank Hold,1,,,35,,,,,bloque 4 - +5seg vs W1
+2026-03-05,jueves,Circuito Spartan - Bloque,9,Plank Hold,1,,,35,,,,bloque 4 - +5seg vs W1
 2026-03-05,jueves,Circuito Spartan - Bloque,10,Burpee,2,,12,,,,,bloque 5 - +2 vs W1
 2026-03-05,jueves,Circuito Spartan - Bloque,11,Goblet Squat,1,,14,,,,,bloque 6 - +2 vs W1
 2026-03-05,jueves,Circuito Spartan - Total,12,Running - Circuito,1,,,1800-2100,5.5-6.5,,,"distancia total estimada - descanso 1min entre bloques"
