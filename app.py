@@ -57,7 +57,8 @@ def format_exercise_summary(group_df):
     n_sets = len(group_df)
 
     # Reps
-    reps_vals = group_df["reps"].dropna().unique()
+    reps_numeric = pd.to_numeric(group_df["reps"].dropna(), errors="coerce").dropna()
+    reps_vals = reps_numeric.unique()
     if len(reps_vals) == 1:
         reps_str = str(int(reps_vals[0]))
     elif len(reps_vals) > 1:
@@ -66,8 +67,8 @@ def format_exercise_summary(group_df):
         reps_str = None
 
     # Weight
-    weight_vals = group_df["peso_lb"].dropna()
-    weight_vals = weight_vals[weight_vals > 0]
+    weight_numeric = pd.to_numeric(group_df["peso_lb"].dropna(), errors="coerce").dropna()
+    weight_vals = weight_numeric[weight_numeric > 0]
     if len(weight_vals) == 1:
         weight_str = f"@ {weight_vals.iloc[0]:.0f}lb"
     elif len(weight_vals) > 1 and weight_vals.nunique() > 1:
@@ -84,8 +85,9 @@ def format_exercise_summary(group_df):
     # Duration
     dur_vals = group_df["duracion_seg"].dropna()
     if len(dur_vals) > 0 and reps_str is None:
-        dur_val = dur_vals.iloc[0]
-        sets_part = f"{n_sets}\u00d7{dur_val}s"
+        d = safe_numeric(dur_vals.iloc[0])
+        dur_label = f"{d:.0f}" if d is not None else str(dur_vals.iloc[0])
+        sets_part = f"{n_sets}\u00d7{dur_label}s"
     elif reps_str:
         sets_part = f"{n_sets}\u00d7{reps_str}"
     else:
@@ -97,6 +99,20 @@ def format_exercise_summary(group_df):
     if rpe_str:
         parts.append(rpe_str)
     return " ".join(parts)
+
+
+def safe_numeric(val):
+    """Convert a value to float safely. Handles range strings like '20-30' by returning the max."""
+    n = pd.to_numeric(val, errors="coerce")
+    if pd.notna(n):
+        return float(n)
+    if isinstance(val, str) and "-" in val:
+        parts = val.split("-")
+        try:
+            return max(float(p) for p in parts)
+        except ValueError:
+            return None
+    return None
 
 
 def format_warmup_chip(ex_group):
@@ -114,11 +130,15 @@ def format_warmup_chip(ex_group):
             break
 
     if len(dur) > 0:
-        d = dur.iloc[0]
-        mins = d / 60
-        chip = f"{name} {mins:.0f} min" if mins >= 1 else f"{name} {d:.0f}s"
+        d = safe_numeric(dur.iloc[0])
+        if d is not None:
+            mins = d / 60
+            chip = f"{name} {mins:.0f} min" if mins >= 1 else f"{name} {d:.0f}s"
+        else:
+            chip = f"{name} {dur.iloc[0]}"
     elif len(reps) > 0:
-        r = int(reps.iloc[0])
+        r = safe_numeric(reps.iloc[0])
+        r = int(r) if r is not None else reps.iloc[0]
         if n_sets > 1:
             chip = f"{name} \u00d7{r}{nota_str} \u00d7{n_sets}"
         else:
@@ -135,24 +155,32 @@ def format_exercise_compact(ex_group):
     reps = ex_group["reps"].dropna()
     dur = ex_group["duracion_seg"].dropna()
     weight = ex_group["peso_lb"].dropna()
-    weight = weight[weight > 0]
+    weight_numeric = pd.to_numeric(weight, errors="coerce").dropna()
+    weight_numeric = weight_numeric[weight_numeric > 0]
     rpe = ex_group["rpe_target"].dropna().unique()
 
     if len(reps) > 0:
-        r_vals = reps.unique()
-        r_str = str(int(r_vals[0])) if len(r_vals) == 1 else f"{int(min(r_vals))}-{int(max(r_vals))}"
+        r_numeric = pd.to_numeric(reps, errors="coerce").dropna()
+        if len(r_numeric) > 0:
+            r_vals = r_numeric.unique()
+            r_str = str(int(r_vals[0])) if len(r_vals) == 1 else f"{int(min(r_vals))}-{int(max(r_vals))}"
+        else:
+            r_str = str(reps.iloc[0])
         sets_str = f"\u00d7{r_str}"
     elif len(dur) > 0:
-        d = dur.iloc[0]
-        sets_str = f"\u00d7 {d:.0f} seg"
+        d = safe_numeric(dur.iloc[0])
+        if d is not None:
+            sets_str = f"\u00d7{d:.0f} seg"
+        else:
+            sets_str = f"\u00d7{dur.iloc[0]}s"
     else:
         sets_str = ""
 
     rpe_str = f"@{rpe[0]}" if len(rpe) > 0 else ""
     mid = f"{sets_str} {rpe_str}".strip()
 
-    if len(weight) > 0:
-        w_vals = weight.unique()
+    if len(weight_numeric) > 0:
+        w_vals = weight_numeric.unique()
         if len(w_vals) == 1:
             w_str = f"~{w_vals[0]:.0f} lb"
         else:
