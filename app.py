@@ -803,76 +803,34 @@ elif page == "📋 Mi Plan":
                                     "WARM\u2011UP: " + " \u00b7 ".join(chips)
                                 )
                             else:
-                                # Section header
+                                # Section header as single caption line
                                 if sub:
-                                    # Build section detail from notas
-                                    notas_all = sub_data["notas"].dropna().unique()
                                     n_rounds = sub_data.groupby("ejercicio").size().max()
                                     descanso = sub_data["descanso_seg"].dropna()
-                                    detail_parts = []
+                                    hdr_parts = [sub.upper()]
                                     if n_rounds > 1:
-                                        detail_parts.append(
-                                            f"{n_rounds} rondas"
-                                        )
+                                        hdr_parts.append(f"{n_rounds}r")
                                     if len(descanso) > 0:
-                                        raw_d = descanso.iloc[0]
-                                        d_val = pd.to_numeric(raw_d, errors="coerce")
-                                        if pd.isna(d_val) and isinstance(raw_d, str) and "-" in raw_d:
-                                            parts = raw_d.split("-")
-                                            try:
-                                                d_val = max(float(p) for p in parts)
-                                            except ValueError:
-                                                d_val = None
-                                        if d_val is not None and not pd.isna(d_val):
-                                            if d_val >= 60:
-                                                detail_parts.append(
-                                                    f"{d_val/60:.0f} min descanso"
-                                                )
-                                            else:
-                                                detail_parts.append(
-                                                    f"{d_val:.0f}s descanso"
-                                                )
-                                    detail_str = (
-                                        " \u00b7 ".join(detail_parts)
-                                        if detail_parts
-                                        else ""
-                                    )
-                                    header = f"**{sub.upper()}**"
-                                    if detail_str:
-                                        header += f" \u2014 {detail_str}"
-                                    st.markdown(header)
+                                        d_val = safe_numeric(descanso.iloc[0])
+                                        if d_val is not None:
+                                            d_str = f"{d_val/60:.0f}min" if d_val >= 60 else f"{d_val:.0f}s"
+                                            hdr_parts.append(f"rest {d_str}")
+                                    st.caption(" \u00b7 ".join(hdr_parts))
 
-                                # Exercise rows
+                                # Build all exercises as a single markdown table
+                                rows = []
                                 for _o, grp in sub_data.groupby(
                                     "orden_ejercicio", sort=True
                                 ):
-                                    name, mid, w_str = (
-                                        format_exercise_compact(grp)
+                                    name, mid, w_str = format_exercise_compact(grp)
+                                    mid_display = f"`{mid}`" if mid else ""
+                                    rows.append(f"**{name}** | {mid_display} | {w_str}")
+                                if rows:
+                                    table_md = "| Ejercicio | Sets | Peso |\n|:--|:--|--:|\n"
+                                    table_md += "\n".join(
+                                        f"| {r}" for r in rows
                                     )
-                                    c1, c2, c3 = st.columns([3, 2, 1])
-                                    with c1:
-                                        st.markdown(f"**{name}**")
-                                    with c2:
-                                        st.markdown(
-                                            f"`{mid}`" if mid else ""
-                                        )
-                                    with c3:
-                                        st.caption(w_str)
-
-                                    # Important notas (not warmup, not empty)
-                                    notas = grp["notas"].dropna().unique()
-                                    notas = [
-                                        n for n in notas
-                                        if str(n).strip().lower()
-                                        not in ("warmup", "")
-                                        and "superserie ronda" not in str(n).lower()
-                                        and "bloque" not in str(n).lower()
-                                    ]
-                                    if notas:
-                                        st.caption(
-                                            f"\u00a0\u00a0\u00a0\u00a0"
-                                            f"\U0001f4a1 {notas[0]}"
-                                        )
+                                    st.markdown(table_md, unsafe_allow_html=False)
 
 
 # ============================================================
